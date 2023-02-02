@@ -1,0 +1,11 @@
+FROM havina/node-angular:0.1 as builder
+RUN mkdir -p /app
+WORKDIR /app
+COPY package.json package-lock.json /app/
+RUN npm install
+COPY . /app
+RUN ng build --configuration=staging
+
+FROM nginx:1.23.1-alpine
+COPY --from=builder /app/dist/havina-fe-ant /var/www/havina-fe-ant
+COPY nginx.conf /etc/nginx/nginx.conf

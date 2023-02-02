@@ -1,0 +1,227 @@
+@import '../../../assets/style/color.scss';
+
+nz-header {
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+  .ant-row {
+    justify-content: space-between;
+    .header-menu {
+      padding-right : 24px;
+      .header-container {
+        display:flex;
+      }
+    }
+  }
+}
+
+.dropdown-select-container {
+  .ant-select-dropdown {
+    cdk-virtual-scroll-viewport {
+      height: 70px !important;
+    }
+  }
+}
+.select-container {
+  display: flex;
+  align-items: center;
+}
+.lang-container {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 60px;
+  margin-top: 4px;
+  img {
+    width: 24px
+  }
+}
+
+::ng-deep #cdk-overlay-1.cdk-overlay-pane {
+  ::ng-deep nz-option-container.ant-select-dropdown {
+    width: 90px !important;
+    ::ng-deep cdk-vỉutal-scroll-viewport {
+      height : 70px;
+    }
+  }
+}
+
+
+.dropdown-container {
+  font-size: 14px;
+  // box-shadow: 0 5px 4px rgba(0, 21, 41, 0.08);
+  &.icon-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 60px;  
+  }
+  &.icon-button:hover {
+    cursor: pointer;
+  }
+  .icon-button-number{
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    width: 22px;
+    height: 22px;
+    background-color: $error-color;
+    color: $bg-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+  }
+
+  &.notification-container {
+      width: 350px;
+  }
+  &.infomation-container {
+    width: 150px;
+    top: 18px;
+  }
+  ul {
+    padding: 0;
+    .notication-title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      .btn {
+        color: $primary-color;
+        font-size: 12px;
+        text-transform: capitalize;
+        padding: 3px 8px;
+        &:hover {
+          background-color: $bg-icon-blue;
+        }
+      }
+    }
+    .item-dropdown {
+      max-height: 200px;
+      overflow: auto;
+      li {
+        display: flex;
+        gap: 20px;
+        padding: 12px 20px;
+        border: 1px solid $border-color;
+        font-size: 14px;
+        &:hover {
+          background: $bg-hover;
+        }
+        &.ant-dropdown-menu-item-selected {
+          background: $bg-hover;
+        }
+        .item-dropdown {
+          display: flex;
+          flex-direction: column;
+          .title-item{
+            font-weight: 600
+          }
+          .time-title-item {
+            font-size: 11px;
+          }
+        }
+        .icon-item-dropdown {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 8px;
+          border-radius: 50px;
+          .anticon {
+            font-size: 16px;
+          }
+          &.bg-icon-blue {
+            background: $bg-icon-blue;
+          }
+          &.bg-icon-green {
+            background: $bg-icon-green;
+          }
+          &.bg-icon-red {
+            background: $bg-icon-red;
+          }
+          &.bg-icon-yellow {
+            background: $bg-icon-yellow;
+          }
+          &.ic-user-add {
+            .anticon { 
+              color: $green-400;
+            }
+          }
+          &.ic-sync {
+            .anticon {
+              color: $yellow-400;
+            }
+          }
+          &.ic-user {
+            .anticon {
+              color: $primary-color;
+            }
+          }
+          &.ic-logout {
+            .anticon {
+              color: $yellow-400;
+            }
+          }
+        }
+      }
+    }  
+  }
+}
+
+
+.app-header {
+  position: relative;
+  height: 64px;
+  padding: 0;
+  background: $bg-white;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  nz-select {
+    width: 113px;
+    .ant-select-selector {
+      border: 0px !important;
+    }
+  }
+
+
+  @keyframes bell {
+    0% {
+      transform: rotate(35deg);
+    }
+    12.5% {
+      transform: rotate(-30deg);
+    }
+    25% {
+      transform: rotate(25deg);
+    }
+    37.5% {
+      transform: rotate(-20deg);
+    }
+    50% {
+      transform: rotate(15deg);
+    }
+    62.5% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+  
+  .ant-select-selector {
+    border: 0px !important;
+  }
+}
+
+nz-select {
+  width: 100% !important;
+}
+
+::ng-deep cdk-virtual-scroll-viewport {
+  overflow: hidden !important;
+}

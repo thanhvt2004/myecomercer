@@ -1,0 +1,141 @@
+<div class="sidebar-container">
+  <div>
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'dashboard'"
+        nzTitle="{{ 'Modules.Menu.Dashboard.Title' | translate }}"
+        nzIcon="dashboard"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['dashboard/manager']">{{
+              "Modules.Menu.Dashboard.Manager" | translate
+            }}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['dashboard/teacher']">{{
+              "Modules.Menu.Dashboard.Teacher" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'teacher'"
+        nzTitle="{{ 'Modules.Menu.Teacher.Title' | translate }}"
+        nzIcon="form"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['teacher/list']">{{
+              "Modules.Menu.Teacher.TeacherList" | translate
+            }}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['teacher/create']">{{
+              "Modules.Menu.Teacher.TeacherAdd" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'class'"
+        nzTitle="{{ 'Modules.Menu.Class.Title' | translate }}"
+        nzIcon="form"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['class/list']">{{
+              "Modules.Menu.Class.ClassList" | translate
+            }}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['class/new']">{{
+              "Modules.Menu.Class.New" | translate
+            }}</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['standalone/schedule']">{{
+              "Modules.Menu.Class.Schedule" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'student'"
+        nzTitle="{{ 'Modules.Menu.Student.Title' | translate }}"
+        nzIcon="form"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['student/visitor']">{{
+              "Modules.Menu.Student.VisitorList" | translate
+            }}</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['student/student-list']">{{
+              "Modules.Menu.Student.StudentList" | translate
+            }}</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['standalone']">{{
+              "Modules.Menu.Student.FormRegister" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'report'"
+        nzTitle="{{ 'Modules.Menu.Report.Title' | translate }}"
+        nzIcon="form"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['report']">{{
+              "Modules.Menu.Report.Teacher" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+      <li
+        nz-submenu
+        [nzOpen]="currentRoute === 'setting'"
+        nzTitle="{{ 'Modules.Menu.Setting.Title' | translate }}"
+        nzIcon="form"
+      >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['qc/dashboard']">{{
+              "Modules.Menu.Setting.Salary" | translate
+            }}</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['qc/dashboard']">{{
+              "Modules.Menu.Setting.Skill" | translate
+            }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="copy-right" *ngIf="!isCollapsed">
+    {{ "Labels.DevelopedBy" | translate }}
+    <a target="_blank" href="https://smartaio.vn">SmartAIO.vn</a>
+  </div>
+  <div class="copy-right" style="font-size: 10px" *ngIf="isCollapsed">
+    <a target="_blank" href="https://smartaio.vn">SmartAIO.vn</a>
+  </div>
+</div>

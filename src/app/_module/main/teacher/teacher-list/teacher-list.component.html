@@ -1,0 +1,279 @@
+<aio-template-layout>
+  MYPA workkkk
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a [routerLink]="['teacher/list']">{{
+          "Modules.Menu.Teacher.TeacherList" | translate
+        }}</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- ACTION BAR -->
+  <ng-container actionBarTemplate>
+    <button nz-button nzType="primary" (click)="createTeacher()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i
+      >{{ "Labels.Create" | translate }}
+    </button>
+  </ng-container>
+  <!-- END ACTION BAR -->
+
+  <!-- PAGE TITLE -->
+  <ng-container pageTitleTemplate> </ng-container>
+  <!-- END PAGE TITLE -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <form
+      *ngIf="searchTeacherForm"
+      nz-form
+      [formGroup]="searchTeacherForm"
+      class="ant-advanced-search-form"
+    >
+      <div class="form-container">
+        <div class="form-item-container">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.StartDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                formControlName="startDate"
+                [nzFormat]="dateFormat"
+                style="width: 100%"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label style="margin-left: 15px" [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.EndDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                formControlName="endDate"
+                [nzFormat]="dateFormat"
+                style="width: 100%"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-item-container"></div>
+      </div>
+      <ng-container *ngIf="!isCollapse">
+        <div class="form-container">
+          <nz-form-item class="form-item-container">
+            <nz-form-label [nzFor]="">
+              {{ "Modules.Teacher.Code" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <input nz-input formControlName="code" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="form-item-container">
+            <nz-form-label>
+              {{ "Modules.Teacher.Skills" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select
+                nzShowSearch
+                nzMode="multiple"
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="skill_ids"
+                [nzShowArrow]="true"
+              >
+                <nz-option
+                  *ngFor="let skill of skills"
+                  [nzLabel]="skill.name"
+                  [nzValue]="skill.id"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-container">
+          <nz-form-item class="form-item-container">
+            <nz-form-label [nzFor]="">
+              {{ "Modules.Class.ClassList.Labels.Teachers" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select
+                nzMode="multiple"
+                nzShowSearch
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="teacher_ids"
+                [nzShowArrow]="true"
+              >
+                <nz-option
+                  *ngFor="let teacher of teachers"
+                  [nzValue]="teacher.id"
+                  [nzLabel]="teacher.full_name"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="form-item-container">
+            <nz-form-label>
+              {{ "Modules.Class.New.Forms.Course" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select
+                nzShowSearch
+                nzMode="multiple"
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="course_ids"
+                [nzShowArrow]="true"
+              >
+                <nz-option
+                  *ngFor="let course of courses"
+                  [nzLabel]="course.name"
+                  [nzValue]="course.id"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-container">
+          <nz-form-item class="form-item-container">
+            <nz-form-label>
+              {{ "Modules.Teacher.Classes" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select
+                nzMode="multiple"
+                nzShowSearch
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="class_ids"
+                [nzShowArrow]="true"
+                (nzOnSearch)="onSearch($event)"
+              >
+                <nz-option
+                  *ngFor="let class of classesObs$ | async"
+                  [nzLabel]="class.code"
+                  [nzValue]="class.id"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item-container"></nz-form-item>
+        </div>
+      </ng-container>
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button
+            nz-button
+            [nzType]="'primary'"
+            (click)="getTeacherListFromSearch()"
+          >
+            {{ "Labels.Search" | translate }}
+          </button>
+          <button nz-button (click)="resetForm()">
+            {{ "Labels.Clear" | translate }}
+          </button>
+          <button
+            nz-button
+            nzType="text"
+            class="collapse"
+            (click)="toggleCollapse()"
+          >
+            <span *ngIf="!isCollapse">{{ "Labels.Collapse" | translate }}</span>
+            <span *ngIf="isCollapse">{{ "Labels.Expand" | translate }}</span>
+            <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="search-result-list">
+      <nz-table
+        #teacherListTable
+        class="w-auto-scroll"
+        [nzData]="teacherList"
+        [nzBordered]="true"
+        [nzPageSize]="pageSize"
+        style="width: 100%"
+        [nzPageSizeOptions]="[10, 20, 30, 40, 50, 100, 200]"
+        nzShowSizeChanger
+      >
+        <thead>
+          <tr>
+            <th width="10%" nzAlign="center">
+              {{ "Modules.Teacher.Code" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Teacher.Teacher" | translate }}
+            </th>
+            <th width="10%">
+              {{ "Modules.Teacher.Type" | translate }}
+            </th>
+            <th width="10%">
+              {{ "Modules.Teacher.Salary" | translate }}
+            </th>
+            <th width="10%" nzAlign="right">
+              {{ "Modules.Teacher.Kpi" | translate }}
+            </th>
+            <th width="10%">
+              {{ "Modules.Teacher.Course" | translate }}
+            </th>
+            <th width="25%">
+              {{ "Modules.Teacher.Process" | translate }}
+            </th>
+            <th width="5%" nzAlign="center">
+              {{ "Modules.Teacher.Action" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let data of teacherListTable.data; let i = index"
+          >
+            <tr>
+              <td nzAlign="center">{{ data.code }}</td>
+              <td>{{ data.full_name }}</td>
+              <td>
+                {{ data.type_value_ui }}
+              </td>
+              <td>
+                {{ data.rank_name }}
+              </td>
+              <td nzAlign="right">
+                {{ data.kpi_teaching_hours | number }}
+              </td>
+              <td>
+                {{ data.course_codes }}
+              </td>
+
+              <td>{{ data.process }}</td>
+
+              <td nzAlign="center">
+                <span
+                  (click)="onClickDetailTeacher(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="eye"
+                  nzTheme="outline"
+                ></span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+  <!-- END CONTENT -->
+</aio-template-layout>

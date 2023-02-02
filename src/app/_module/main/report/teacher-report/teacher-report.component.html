@@ -1,0 +1,166 @@
+<aio-template-layout>
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a [routerLink]="['report']">{{
+          "Modules.Menu.Report.Title" | translate
+        }}</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- PAGE TITLE -->
+  <ng-container pageTitleTemplate> </ng-container>
+  <!-- END PAGE TITLE -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <form
+      *ngIf="searchTeacherReportForm"
+      nz-form
+      [formGroup]="searchTeacherReportForm"
+      class="ant-advanced-search-form"
+    >
+      <div class="form-container">
+        <div class="form-item-container">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.StartDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                formControlName="startDate"
+                [nzFormat]="dateFormat"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label style="margin-left: 15px" [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.EndDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                formControlName="endDate"
+                [nzFormat]="dateFormat"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-item-container"></div>
+      </div>
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label nzFor="select">
+            {{ "Modules.Student.Select" | translate }}</nz-form-label
+          >
+          <nz-form-control>
+            <nz-radio-group
+              (ngModelChange)="onChangeSelect($event)"
+              formControlName="select"
+            >
+              <label nz-radio nzValue="teacher">{{
+                "Modules.Teacher.Teacher" | translate
+              }}</label>
+              <label nz-radio nzValue="room">{{
+                "Modules.Teacher.Room" | translate
+              }}</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="form-item-container"></nz-form-item>
+      </div>
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label [nzFor]="">
+            {{ "Modules.Class.ClassList.Labels.Teachers" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzShowSearch
+              nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+              formControlName="teacher_ids"
+              [nzShowArrow]="true"
+            >
+              <nz-option
+                *ngFor="let teacher of teachers"
+                [nzValue]="teacher.id"
+                [nzLabel]="teacher.full_name"
+              >
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-item-container"></nz-form-item>
+      </div>
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label [nzFor]="">
+            {{ "Modules.Class.ClassList.Labels.Rooms" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzShowSearch
+              nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+              formControlName="room_ids"
+              [nzShowArrow]="true"
+            >
+              <nz-option
+                *ngFor="let room of rooms"
+                [nzValue]="room.id"
+                [nzLabel]="room.name"
+              >
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-item-container"></nz-form-item>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button nz-button [nzType]="'primary'" (click)="onSearch()">
+            {{ "Labels.Search" | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 50px">
+        <kendo-scheduler
+          [kendoSchedulerBinding]="events"
+          [selectedDate]="selectedDate"
+          [weekStart]="weekStart"
+          startTime="00:00"
+          endTime="23:59"
+          style="height: 700px; margin-bottom: 20px"
+          [(selectedViewIndex)]="selectedViewIndex"
+          (dateChange)="onDateChangeSchedule($event)"
+        >
+          <kendo-scheduler-day-view> </kendo-scheduler-day-view>
+
+          <kendo-scheduler-week-view> </kendo-scheduler-week-view>
+          <kendo-scheduler-month-view></kendo-scheduler-month-view>
+          <kendo-scheduler-messages
+            today="{{ 'KendoUI.Calendar.Today' | translate }}"
+            allDay="{{ 'KendoUI.Calendar.AllDay' | translate }}"
+            monthViewTitle="{{ 'KendoUI.Calendar.MonthViewTitle' | translate }}"
+            showWorkDay="{{ 'KendoUI.Calendar.ShowWorkDay' | translate }}"
+            showFullDay="{{ 'KendoUI.Calendar.ShowFullDay' | translate }}"
+          >
+          </kendo-scheduler-messages>
+        </kendo-scheduler>
+      </div>
+    </form>
+  </ng-container>
+  <!-- END CONTENT -->
+</aio-template-layout>

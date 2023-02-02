@@ -1,0 +1,450 @@
+<aio-template-layout>
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a routerLink="/teacher/list">
+          {{ "Modules.Menu.Teacher.TeacherList" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item>
+        {{
+          "Modules.Menu.Teacher.TeacherDetail" | translate
+        }}</nz-breadcrumb-item
+      >
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <div class="header-content-container">
+      <!-- TAB SEGMENT -->
+      <nz-segmented
+        [nzOptions]="[
+          'Modules.Teacher.Information' | translate,
+          'Modules.Teacher.Classes' | translate,
+          'Modules.Teacher.Schedule' | translate
+        ]"
+        [(ngModel)]="selectedIndex"
+        (nzValueChange)="handleIndexChange($event)"
+      ></nz-segmented>
+      <!--END TAB SEGMENT -->
+      <div *ngIf="selectedIndex === 0">
+        <div *ngIf="isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="onSaveTeacherDetail()">
+            {{ "Labels.Save" | translate }}
+          </button>
+          <button nz-button (click)="onClickCancel()">
+            {{ "Labels.Cancel" | translate }}
+          </button>
+        </div>
+        <div *ngIf="!isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="onClickEditTeacher()">
+            {{ "Labels.Update" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <ng-container *ngIf="selectedIndex === 0">
+      <div class="ant-advanced-search-form">
+        <form *ngIf="teacherDetailForm" nz-form [formGroup]="teacherDetailForm">
+          <!-- ROW 1 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="last_name">
+                  {{ "Modules.Teacher.LastName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="last_name" id="last_name" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="middle_name">
+                  {{ "Modules.Teacher.MiddleName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="middle_name"
+                    id="middle_name"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="first_name">
+                  {{ "Modules.Teacher.FirstName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="first_name"
+                    id="first_name"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="date_of_birth">
+                  {{ "Modules.Teacher.DateOfBirth" | translate }}</nz-form-label
+                >
+                <nz-form-control *ngIf="f['date_of_birth'].enabled">
+                  <nz-date-picker
+                    formControlName="date_of_birth"
+                    id="date_of_birth"
+                    [nzFormat]="dateFormat"
+                    style="width: 60%"
+                  ></nz-date-picker>
+                </nz-form-control>
+                <ng-container *ngIf="f['date_of_birth'].disabled">
+                  <p style="margin: 0; padding-top: 4px">
+                    {{ f["date_of_birth"].value | stringReplace }}
+                  </p>
+                </ng-container>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="type">
+                  {{ "Modules.Teacher.Type" | translate }}</nz-form-label
+                >
+                <nz-form-control *ngIf="f['type'].enabled">
+                  <nz-radio-group formControlName="type">
+                    <label nz-radio nzValue="Local">{{
+                      "Modules.Teacher.Local" | translate
+                    }}</label>
+                    <label nz-radio nzValue="Foreigner">{{
+                      "Modules.Teacher.Foreigner" | translate
+                    }}</label>
+                  </nz-radio-group>
+                </nz-form-control>
+                <ng-container *ngIf="f['type'].disabled">
+                  <p style="margin: 0; padding-top: 4px">
+                    <ng-container *ngIf="f['type'].value === 'Local'">
+                      {{ "Modules.Teacher.Local" | translate }}
+                    </ng-container>
+                    <ng-container *ngIf="f['type'].value === 'Foreigner'">
+                      {{ "Modules.Teacher.Foreigner" | translate }}
+                    </ng-container>
+                  </p>
+                </ng-container>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="email">
+                  {{ "Modules.Teacher.Email" | translate }}</nz-form-label
+                >
+                <nz-form-control
+                  nzErrorTip="{{
+                    'Modules.Teacher.Message.EmailInValid' | translate
+                  }}"
+                >
+                  <input nz-input formControlName="email" id="email" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="mobile_phone">
+                  {{ "Modules.Teacher.Phone" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="mobile_phone"
+                    id="mobile_phone"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-label nzFor="address">
+                  {{ "Modules.Teacher.Address" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="home_address" id="address" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="gender">
+                  {{ "Modules.Teacher.Gender" | translate }}</nz-form-label
+                >
+                <nz-form-control *ngIf="f['sex'].enabled">
+                  <nz-radio-group formControlName="sex">
+                    <label nz-radio nzValue="male">{{
+                      "Modules.Teacher.Male" | translate
+                    }}</label>
+                    <label nz-radio nzValue="female">{{
+                      "Modules.Teacher.Female" | translate
+                    }}</label>
+                  </nz-radio-group>
+                </nz-form-control>
+                <ng-container *ngIf="f['sex'].disabled">
+                  <p style="margin: 0; padding-top: 4px">
+                    <ng-container *ngIf="f['sex'].value === 'male'">
+                      {{ "Modules.Teacher.Male" | translate }}
+                    </ng-container>
+                    <ng-container *ngIf="f['sex'].value === 'female'">
+                      {{ "Modules.Teacher.Female" | translate }}
+                    </ng-container>
+                  </p>
+                </ng-container>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label nzFor="contract">
+                  {{ "Modules.Teacher.Contract" | translate }}</nz-form-label
+                >
+                <nz-form-control *ngIf="f['contract'].enabled">
+                  <nz-radio-group formControlName="contract">
+                    <label nz-radio nzValue="Full-time">{{
+                      "Modules.Teacher.FullTime" | translate
+                    }}</label>
+                    <label nz-radio nzValue="Part-time">{{
+                      "Modules.Teacher.PartTime" | translate
+                    }}</label>
+                  </nz-radio-group>
+                </nz-form-control>
+                <ng-container *ngIf="f['contract'].disabled">
+                  <p style="margin: 0; padding-top: 4px">
+                    <ng-container *ngIf="f['contract'].value === 'Full-time'">
+                      {{ "Modules.Teacher.FullTime" | translate }}
+                    </ng-container>
+                    <ng-container *ngIf="f['contract'].value === 'Part-time'">
+                      {{ "Modules.Teacher.PartTime" | translate }}
+                    </ng-container>
+                  </p>
+                </ng-container>
+              </nz-form-item>
+              <ng-container *ngIf="f['contract'].value === 'Full-time'">
+                <nz-form-item>
+                  <nz-form-label nzFor="KpiTeaching">
+                    {{
+                      "Modules.Teacher.KpiTeaching" | translate
+                    }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      mask="separator.1"
+                      thousandSeparator=","
+                      formControlName="kpi_teaching_hours"
+                      id="kpi_teaching_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label nzFor="KpiAdmin">
+                    {{ "Modules.Teacher.KpiAdmin" | translate }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      formControlName="kpi_admin_hours"
+                      mask="separator.1"
+                      thousandSeparator=","
+                      id="kpi_admin_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label nzFor="RankSalary">
+                    {{
+                      "Modules.Teacher.RankSalary" | translate
+                    }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <nz-form-control *ngIf="f['rank_id'].enabled">
+                      <nz-select
+                        nzShowSearch
+                        nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                        formControlName="rank_id"
+                        id="rank_id"
+                        [nzShowArrow]="true"
+                      >
+                        <nz-option
+                          *ngFor="let rank of ranks"
+                          [nzLabel]="rank.name"
+                          [nzValue]="rank.id"
+                        >
+                        </nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                    <ng-container *ngIf="f['rank_id'].disabled">
+                      <p style="margin: 0; padding-top: 4px">
+                        {{ teacherDetail.rank_name }}
+                      </p>
+                    </ng-container>
+                  </nz-form-control>
+                </nz-form-item>
+              </ng-container>
+              <ng-container *ngIf="f['contract'].value === 'Part-time'">
+                <nz-form-item>
+                  <nz-form-label nzFor="SalaryTeaching">
+                    {{
+                      "Modules.Teacher.SalaryTeaching" | translate
+                    }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      formControlName="salary_per_teaching_hour"
+                      id="salary_per_teaching_hour"
+                      mask="separator.1"
+                      thousandSeparator=","
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </ng-container>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <!-- <nz-form-label nzFor="levels_skills">
+                  {{
+                    "Modules.Teacher.LevelsSkills" | translate
+                  }}</nz-form-label> -->
+                <nz-form-control *ngIf="nodes && nodes.length > 0">
+                  <div class="custom-label" for="levels_skills">{{
+                    "Modules.Teacher.LevelsSkills" | translate
+                  }}</div>
+                  <nz-tree
+                    #nzTreeComponent
+                    [nzData]="nodes"
+                    nzCheckable="true"
+                    nzMultiple
+                    [nzCheckedKeys]="defaultCheckedKeys"
+                    [nzExpandAll]="true"
+                    nzVirtualHeight="550px"
+                  ></nz-tree>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div>
+            <div nz-row [nzGutter]="24"></div>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedIndex === 1">
+      <div class="search-result-list">
+        <nz-table
+          #teacherDetailTable
+          class="w-auto-scroll"
+          [nzData]="teacherList"
+          [nzBordered]="true"
+          [nzPageSize]="pageSize"
+          [nzPageSizeOptions]="[10, 20, 30, 40, 50, 100, 200]"
+          nzShowSizeChanger
+          style="width: 100%"
+        >
+          <thead>
+            <tr>
+              <th width="10%">
+                {{ "Modules.Teacher.ClassCode" | translate }}
+              </th>
+              <th width="20%">
+                {{ "Modules.Teacher.Course" | translate }}
+              </th>
+              <th width="15%">
+                {{ "Modules.Teacher.Time" | translate }}
+              </th>
+              <th width="10%">
+                {{ "Modules.Teacher.Status" | translate }}
+              </th>
+              <th width="10%">
+                {{ "Modules.Teacher.Room" | translate }}
+              </th>
+
+              <th width="25%">
+                {{ "Modules.Teacher.Process" | translate }}
+              </th>
+              <th width="10%">
+                {{ "Modules.Teacher.Action" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let data of teacherDetailTable.data; let i = index"
+            >
+              <tr>
+                <td>{{ data.code }}</td>
+                <td>{{ data.name }}</td>
+                <td>
+                  {{ data.start_date | stringReplace }} -
+                  {{ data.end_date | stringReplace }}
+                </td>
+                <td>
+                  {{ data.status }}
+                </td>
+                <td>
+                  <ng-container *ngFor="let room of data.rooms">
+                    {{ room.name }},
+                  </ng-container>
+                </td>
+
+                <td>{{ data.process }}</td>
+
+                <td class="text-center action-column">
+                  <!-- <a><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+                  <a
+                    ><span
+                      class="action-icon"
+                      nz-icon
+                      nzType="delete"
+                      nzTheme="outline"
+                    ></span
+                  ></a> -->
+                  <span
+                  (click)="onClickDetailClass(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="eye"
+                  nzTheme="outline"
+                ></span>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedIndex === 2">
+      <kendo-scheduler
+        [kendoSchedulerBinding]="events"
+        [selectedDate]="selectedDate"
+        [weekStart]="weekStart"
+        startTime="07:00"
+        endTime="22:00"
+        style="height: 700px"
+        (dateChange)="onDateChangeSchedule($event)"
+        [(selectedViewIndex)]="selectedViewIndex"
+      >
+        <kendo-scheduler-day-view> </kendo-scheduler-day-view>
+
+        <kendo-scheduler-week-view> </kendo-scheduler-week-view>
+
+        <kendo-scheduler-month-view></kendo-scheduler-month-view>
+
+        <kendo-scheduler-messages
+          today="{{ 'KendoUI.Calendar.Today' | translate }}"
+          allDay="{{ 'KendoUI.Calendar.AllDay' | translate }}"
+          dayViewTitle="{{ 'KendoUI.Calendar.DayViewTitle' | translate }}"
+          weekViewTitle="{{ 'KendoUI.Calendar.WeekViewTitle' | translate }}"
+          monthViewTitle="{{ 'KendoUI.Calendar.MonthViewTitle' | translate }}"
+          showWorkDay="{{ 'KendoUI.Calendar.ShowWorkDay' | translate }}"
+          showFullDay="{{ 'KendoUI.Calendar.ShowFullDay' | translate }}"
+        >
+        </kendo-scheduler-messages>
+      </kendo-scheduler>
+    </ng-container>
+  </ng-container>
+
+  <!--END CONTENT -->
+</aio-template-layout>

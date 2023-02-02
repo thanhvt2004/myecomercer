@@ -1,0 +1,109 @@
+<form nz-form [formGroup]="addVisitorHistoryForm">
+  <!-- ROW 1 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="target_course_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+        {{ "Modules.Student.History.TargetCourse" | translate }}
+        </nz-form-label>
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="target_course_id"
+            (ngModelChange)="onChangeTargetCourse($event)"
+            id="target_course_id"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let o of targetCourses"
+              [nzLabel]="o.name"
+              [nzValue]="o.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="target_class_setup_type_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+        {{ "Modules.Student.History.TargetClass" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="target_class_setup_type_id"
+            (ngModelChange)="onChangeTargetClass($event)"
+            id="target_class_setup_type_id"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let o of targetClasses"
+              [nzLabel]="o.value"
+              [nzValue]="o.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 5 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="room_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+        {{ "Modules.Student.History.Note" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <textarea
+          nz-input
+          formControlName="note"
+          rows="7"
+        ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+
+</form>
+
+<div class="button-container">
+  <button nz-button nzType="primary" (click)="onCloseHistoryForm()">
+    {{ "Labels.Save" | translate }}
+  </button>
+  <button nz-button (click)="onCancel()">
+    {{ "Labels.Cancel" | translate }}
+  </button>
+</div>

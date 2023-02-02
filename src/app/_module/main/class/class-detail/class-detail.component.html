@@ -1,0 +1,1068 @@
+<aio-template-layout>
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a routerLink="/class/list">
+          {{ "Modules.Menu.Class.ClassList" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item>
+        {{ "Modules.Menu.Class.ClassDetail" | translate }}</nz-breadcrumb-item
+      >
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <div class="header-content-container">
+      <!-- TAB SEGMENT -->
+      <nz-segmented
+        [nzOptions]="[
+          'Modules.Class.ClassDetail.Labels.ClassDetail' | translate,
+          'Modules.Class.ClassDetail.Labels.StudentList' | translate
+        ]"
+        [(ngModel)]="selectedIndex"
+      ></nz-segmented>
+      <!--END TAB SEGMENT -->
+      <div>
+        <div *ngIf="isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="updateClass()">
+            {{ "Labels.Save" | translate }}
+          </button>
+          <button nz-button (click)="isEdit = false">
+            {{ "Labels.Cancel" | translate }}
+          </button>
+        </div>
+        <div *ngIf="!isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="isEdit = true">
+            {{ "Labels.Update" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <ng-container *ngIf="selectedIndex === 0">
+      <div class="ant-advanced-search-form">
+        <form *ngIf="classDetailForm" nz-form [formGroup]="classDetailForm">
+          <!-- ROW 1 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="name">
+                  {{
+                    "Modules.Class.New.Forms.ClassName" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="name" id="name" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="code">
+                  {{
+                    "Modules.Class.New.Forms.ClassCode" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="code" id="code" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <!-- ROW 2 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="start_date">
+                  {{
+                    "Modules.Class.New.Forms.StartDate" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control *ngIf="f['start_date'].enabled">
+                  <nz-date-picker
+                    formControlName="start_date"
+                    id="start_date"
+                    [nzFormat]="dateFormat"
+                  ></nz-date-picker>
+                </nz-form-control>
+                <ng-container *ngIf="f['start_date'].disabled">
+                  <p style="margin: 0; padding-top: 4px">
+                    {{ f["start_date"].value | date: "dd/MM/YYYY" }}
+                  </p>
+                </ng-container>
+              </nz-form-item>
+            </div>
+          </div>
+          <!-- ROW 3 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="course">
+                  {{
+                    "Modules.Class.New.Forms.Course" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="course" id="course" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="level">
+                  {{
+                    "Modules.Class.New.Forms.Level" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="level" id="level" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <!-- ROW 4 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="module">
+                  {{
+                    "Modules.Class.New.Forms.Module" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="module" id="module" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="syllabus">
+                  {{
+                    "Modules.Class.New.Forms.Syllabus" | translate
+                  }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="syllabus" id="syllabus" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </form>
+
+        <ng-container *ngIf="isExpandSyllabus">
+          <form nz-form [formGroup]="syllabusDetailForm" *ngIf="syllabusDetail">
+            <div class="form-row-container">
+              <div class="form-row-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="sum_duration_hours">
+                    {{
+                      "Modules.Class.Syllabus.DurationHours" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      mask="separator.2"
+                      thousandSeparator=","
+                      formControlName="sum_duration_hours"
+                      id="sum_duration_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+
+              <div class="form-row-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="sum_lesson_hours">
+                    {{
+                      "Modules.Class.Syllabus.ClassHours" | translate
+                    }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      mask="separator.2"
+                      thousandSeparator=","
+                      formControlName="sum_lesson_hours"
+                      id="sum_lesson_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-container">
+              <div class="form-row-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="sum_testing_hours">
+                    {{
+                      "Modules.Class.Syllabus.TestingHours" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      mask="separator.2"
+                      thousandSeparator=","
+                      formControlName="sum_testing_hours"
+                      id="sum_testing_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+
+              <div class="form-row-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="sum_tutoring_hours">
+                    {{
+                      "Modules.Class.Syllabus.TutoringTours" | translate
+                    }}</nz-form-label
+                  >
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      mask="separator.2"
+                      thousandSeparator=","
+                      formControlName="sum_tutoring_hours"
+                      id="sum_tutoring_hours"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="coursebook">
+                    {{
+                      "Modules.Class.Syllabus.CourseBook" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      formControlName="coursebook"
+                      id="coursebook"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="coursebook_description">
+                    {{
+                      "Modules.Class.Syllabus.CourseBookDesciption" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <textarea
+                      nz-input
+                      formControlName="coursebook_description"
+                      rows="7"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="supplementary_materials">
+                    {{
+                      "Modules.Class.Syllabus.SupplementaryMaterials"
+                        | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <textarea
+                      nz-input
+                      formControlName="supplementary_materials"
+                      rows="8"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="teachers_reference">
+                    {{
+                      "Modules.Class.Syllabus.TeacherReference" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <input
+                      nz-input
+                      formControlName="teachers_reference"
+                      id="teachers_reference"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="course_objective">
+                    {{
+                      "Modules.Class.Syllabus.CourseObjectives" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <textarea
+                      nz-input
+                      formControlName="course_objective"
+                      rows="8"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="learning_outcomes">
+                    {{
+                      "Modules.Class.Syllabus.LearningOutcomes" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <textarea
+                      nz-input
+                      formControlName="learning_outcomes"
+                      rows="8"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div class="form-row-text-area-container">
+              <div class="form-row-text-area-item">
+                <nz-form-item>
+                  <nz-form-label nzFor="assessment">
+                    {{
+                      "Modules.Class.Syllabus.Asssement" | translate
+                    }}</nz-form-label
+                  >
+
+                  <nz-form-control>
+                    <textarea
+                      nz-input
+                      formControlName="assessment"
+                      rows="5"
+                    ></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+        <p
+          class="read-more-button"
+          (click)="isExpandSyllabus = true"
+          *ngIf="!isExpandSyllabus && syllabusDetail"
+        >
+          {{ "Labels.ReadMore" | translate }}
+        </p>
+        <p
+          class="read-more-button"
+          (click)="isExpandSyllabus = false"
+          *ngIf="isExpandSyllabus"
+        >
+          {{ "Labels.ReadLess" | translate }}
+        </p>
+        <!-- TABLE WEEKLY SESSION -->
+        <div>
+          <nz-divider
+            nzPlain
+            nzText="Thiết lập"
+            nzOrientation="left"
+          ></nz-divider>
+          <nz-table
+            class="w-auto-scroll"
+            [nzData]="weeklySessions"
+            [nzBordered]="true"
+            [nzShowPagination]="false"
+            style="width: 100%; margin-bottom: 20px"
+          >
+            <thead>
+              <tr>
+                <th width="5%" nzAlign="center">
+                  {{ "Modules.Class.New.Tables.Day" | translate }}
+                </th>
+                <th width="25%">
+                  {{ "Modules.Class.New.Tables.Date" | translate }}
+                </th>
+                <th width="25%">
+                  {{ "Modules.Class.New.Tables.Hour" | translate }}
+                </th>
+
+                <th width="40%">
+                  {{ "Modules.Class.New.Tables.Skill" | translate }}
+                </th>
+
+                <th width="10%" nzAlign="center">
+                  {{ "Modules.Class.New.Tables.Action" | translate }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let data of weeklySessions; let i = index">
+                <tr>
+                  <td nzAlign="center">{{ data.order }}</td>
+                  <td>{{ data.week_day }}</td>
+                  <td>
+                    {{ data.day_start_time | formatHourDisplay }} -
+                    {{ data.day_end_time | formatHourDisplay }}
+                  </td>
+
+                  <td>{{ data.skills }}</td>
+
+                  <td class="text-center action-column">
+                    <ng-container *ngIf="isEdit">
+                      <a (click)="editWeeklySession(data, i)"
+                        ><span nz-icon nzType="edit" nzTheme="outline"></span
+                      ></a>
+                      <!-- <a (click)="deleteWeeklySession(data)"
+                        ><span
+                          class="action-icon"
+                          nz-icon
+                          nzType="delete"
+                          nzTheme="outline"
+                        ></span
+                      ></a> -->
+                    </ng-container>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </nz-table>
+        </div>
+        <!-- END TABLE WEEKLY SESSION -->
+
+        <div>
+          <div nz-row [nzGutter]="24"></div>
+        </div>
+
+        <nz-segmented
+          class="ant-segmented-group"
+          [nzOptions]="[
+            'Modules.Class.ClassDetail.Labels.Sessions' | translate,
+            'Modules.Class.ClassDetail.Labels.Schedule' | translate
+          ]"
+          [(ngModel)]="selectedIndexSession"
+        ></nz-segmented>
+        <!--SESSION -->
+        <ng-container *ngIf="selectedIndexSession === 0">
+          <div nz-row class="search-result-list">
+            <div class="header-table-session">
+              <div><span nz-icon nzType="filter" nzTheme="outline" (click)="clickFilterSession()"></span></div>
+              <div *ngIf="sessions && sessions.length > 0 && isEdit">
+                <button
+                  nz-button
+                  disabled
+                  style="margin-right: 10px"
+                  (click)="updateDate()"
+                >
+                  {{ "Modules.Class.New.Buttons.AddDate" | translate }}
+                </button>
+                <button
+                  [disabled]="setOfCheckedId.size === 0"
+                  nz-button
+                  (click)="updateTeachersAndRooms()"
+                >
+                  {{
+                    "Modules.Class.New.Buttons.AddTeachersAndRooms" | translate
+                  }}
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="isShowFilter" class="filter-session-form">
+              <form nz-form [formGroup]="filterSessionForm">
+                <!-- ROW 1 -->
+                <div class="form-row-container">
+                  <div class="form-row-item">
+                    <nz-form-item>
+                      <nz-form-label nzFor="day">
+                        {{
+                          "Modules.Class.New.Filter.ClassDay" | translate
+                        }}</nz-form-label
+                      >
+                      <nz-form-control>
+                        <!-- <input nz-input formControlName="day" id="day" /> -->
+                        <nz-select
+                        [nzMaxTagCount]="1"
+                        nzMode="multiple"
+                        nzShowSearch
+                        nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                        formControlName="selectedWeekDay"
+                        id="selectedWeekDay"
+                        [nzShowArrow]="true"
+                        
+                        
+                      >
+                        <nz-option
+                          *ngFor="let o of weeklySessions | myfilter: weekDayFilter"
+                          [nzLabel]="o.week_day"
+                          [nzValue]="o.week_day"
+                        >
+                        </nz-option>
+                      </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+        
+                  <div class="form-row-item">
+                    <nz-form-item>
+                      <nz-form-label nzFor="teacher">
+                        {{
+                          "Modules.Class.New.Filter.Teacher" | translate
+                        }}</nz-form-label
+                      >
+                      <nz-form-control>
+                        <!-- <input nz-input formControlName="teacher" id="teacher" /> -->
+                        <nz-select
+                        [nzMaxTagCount]="1"
+                        nzMode="multiple"
+                        nzShowSearch
+                        nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                        formControlName="selectedTeacher"
+                        id="selectedTeacher"
+                        [nzShowArrow]="true"
+                      >
+                        <nz-option
+                          *ngFor="let o of teacherList"
+                          [nzLabel]="o.full_name"
+                          [nzValue]="o.id"
+                        >
+                        </nz-option>
+                      </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div class="form-row-item">
+                    <nz-form-item>
+                      <nz-form-label nzFor="skill">
+                        {{
+                          "Modules.Class.New.Filter.Skill" | translate
+                        }}</nz-form-label
+                      >
+                      <nz-form-control>
+                        <!-- <input nz-input formControlName="skill" id="skill" /> -->
+                        <nz-select
+                        nzMode="multiple"
+                        nzShowSearch
+                        nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                        formControlName="selectedSkill"
+                        id="selectedSkill"
+                        [nzShowArrow]="true"
+                      >
+                        <nz-option
+                          *ngFor="let o of weeklySessions | myfilter: skillFilter"
+                          [nzLabel]="o.skills"
+                          [nzValue]="o.skill_ids"
+                        >
+                        </nz-option>
+                      </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                </div>
+        
+                <!-- ROW 2 -->
+                <div class="form-row-container">
+                  <div class="form-row-item">
+                    <nz-form-item>
+                      <nz-form-label nzFor="start_date">
+                        {{
+                          "Modules.Class.New.Filter.FromTime" | translate
+                        }}</nz-form-label
+                      >
+                     
+                        <!-- <nz-date-picker
+                          
+                          formControlName="start_date"
+                          id="start_date"
+                          [nzFormat]="dateFormat"
+                        ></nz-date-picker> -->
+                        <nz-time-picker
+                        formControlName="start_date"
+                        id="start_date"
+                        nzFormat="HH:mm"
+                        [nzHourStep]="1"
+                        [nzMinuteStep]="5"
+                        nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+                      >
+                      </nz-time-picker>
+                    </nz-form-item>
+                  </div>
+        
+                  <div class="form-row-item">
+                    <nz-form-item>
+                      <nz-form-label nzFor="to_date">
+                        {{
+                          "Modules.Class.New.Filter.ToTime" | translate
+                        }}</nz-form-label
+                      >
+<!--                      
+                        <nz-date-picker
+                          
+                          formControlName="to_date"
+                          id="to_date"
+                          [nzFormat]="dateFormat"
+                        ></nz-date-picker> -->
+
+                        <nz-time-picker
+                        formControlName="to_date"
+                        id="to_date"
+                        nzFormat="HH:mm"
+                        [nzHourStep]="1"
+                        [nzMinuteStep]="5"
+                        nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+                      >
+                      </nz-time-picker>
+
+
+                    </nz-form-item>
+                  </div>
+                  <div class="form-row-item">
+                    <button
+                    nz-button
+                    nzType="primary"
+                    (click)="filterSession()"
+                  >
+                  <span nz-icon nzType="search" nzTheme="outline"></span>
+                  {{ "Modules.Class.New.Filter.Search" | translate }}
+                  </button>
+                  </div>
+                </div>
+        
+                <!-- ROW 3 -->
+               
+              </form>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-table
+                class="w-auto-scroll"
+                nzShowPagination
+                #sessionsTable
+                [nzPageSize]="pageSize"
+                [(nzPageIndex)]="pageIndex"
+                [nzData]="sessions"
+                [nzBordered]="true"
+                [nzFooter]="footer"
+                style="width: 100%"
+                [nzPageSizeOptions]="[6, 12, 18, 24, 30, 36, 42, 48]"
+                nzShowSizeChanger
+                (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+              >
+                <thead>
+                  <tr>
+                    <th
+                      *ngIf="sessions && sessions.length > 0 && isEdit"
+                      width="5%"
+                      [(nzChecked)]="checked"
+                      [nzIndeterminate]="indeterminate"
+                      (nzCheckedChange)="onAllCheckedSession($event)"
+                    ></th>
+                    <th width="5%" nzAlign="center">
+                      {{ "Modules.Class.New.Tables.Day" | translate }}
+                    </th>
+                    <th width="15%">
+                      {{ "Modules.Class.New.Tables.Date" | translate }}
+                    </th>
+                    <th width="10%">
+                      {{ "Modules.Class.New.Tables.Hour" | translate }}
+                    </th>
+                    <th width="10%">
+                      {{ "Modules.Class.New.Tables.Room" | translate }}
+                    </th>
+                    <th width="20%">
+                      {{ "Modules.Class.New.Tables.Skill" | translate }}
+                    </th>
+                    <th width="10%">
+                      {{ "Modules.Class.New.Tables.Teacher" | translate }}
+                    </th>
+                    <th width="10%">
+                      {{ "Modules.Class.New.Tables.Type" | translate }}
+                    </th>
+                    <th width="10%">
+                      {{ "Modules.Class.New.Tables.Unit" | translate }}
+                    </th>
+                    <th width="5%" nzAlign="center">
+                      {{ "Modules.Class.New.Tables.Action" | translate }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container
+                    *ngFor="let data of sessionsTable.data; let i = index"
+                  >
+                    <tr>
+                      <td
+                        *ngIf="sessions && sessions.length > 0 && isEdit"
+                        [nzChecked]="setOfCheckedId.has(data.order)"
+                        (nzCheckedChange)="onItemChecked(data.order, $event)"
+                      ></td>
+                      <td nzAlign="center">{{ data.order }}</td>
+                      <td>
+                        {{ data.start_time_unix | formatTimeStampUnixToDate }}
+                      </td>
+                      <td>
+                        {{ data.start_time_unix | formatTimeStampUnixToHour }} -
+                        {{ data.end_time_unix | formatTimeStampUnixToHour }}
+                      </td>
+                      <td>{{ data.room_name }}</td>
+
+                      <td>{{ data.skills }}</td>
+                      <td class="avatar">
+                        {{ data.teacher_full_name }}
+                      </td>
+                      <td>{{ data.session_type_name }}</td>
+                      <td>{{ data?.unit }}</td>
+                      <td class="text-center">
+                        <ng-container *ngIf="isEdit">
+                          <span
+                            (click)="editSession(data, i)"
+                            class="pointer"
+                            nz-icon
+                            nzType="edit"
+                            nzTheme="outline"
+                          ></span>
+
+                          <span
+                            (click)="deleteSession(data)"
+                            class="action-icon"
+                            nz-icon
+                            nzType="delete"
+                            nzTheme="outline"
+                          ></span>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-template #footer>
+                    <button *ngIf="isEdit" nz-button (click)="addNewSession()">
+                      {{
+                        "Modules.Class.ClassDetail.Tables.AddSession"
+                          | translate
+                      }}
+                    </button>
+                  </ng-template>
+                </tbody>
+              </nz-table>
+            </div>
+          </div>
+        </ng-container>
+        <!-- END SESSION -->
+        <ng-container *ngIf="selectedIndexSession === 1">
+          <kendo-scheduler
+            [kendoSchedulerBinding]="events"
+            [selectedDate]="selectedDate"
+            [weekStart]="weekStart"
+            startTime="00:00"
+            endTime="23:59"
+            style="height: 700px; margin-bottom: 20px"
+            [(selectedViewIndex)]="selectedViewIndex"
+          >
+            <kendo-scheduler-day-view> </kendo-scheduler-day-view>
+
+            <kendo-scheduler-week-view> </kendo-scheduler-week-view>
+            <kendo-scheduler-month-view></kendo-scheduler-month-view>
+            <kendo-scheduler-messages
+              today="{{ 'KendoUI.Calendar.Today' | translate }}"
+              allDay="{{ 'KendoUI.Calendar.AllDay' | translate }}"
+              monthViewTitle="{{
+                'KendoUI.Calendar.MonthViewTitle' | translate
+              }}"
+              showWorkDay="{{ 'KendoUI.Calendar.ShowWorkDay' | translate }}"
+              showFullDay="{{ 'KendoUI.Calendar.ShowFullDay' | translate }}"
+            >
+            </kendo-scheduler-messages>
+          </kendo-scheduler>
+        </ng-container>
+
+        <div *ngIf="isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="updateClass()">
+            {{ "Labels.Save" | translate }}
+          </button>
+          <button nz-button (click)="isEdit = false">
+            {{ "Labels.Cancel" | translate }}
+          </button>
+        </div>
+        <div *ngIf="!isEdit" class="register-area">
+          <button nz-button nzType="primary" (click)="isEdit = true">
+            {{ "Labels.Update" | translate }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedIndex === 1">
+      <div>
+        <nz-table
+          class="w-auto-scroll"
+          [nzData]="weeklySessions"
+          [nzBordered]="true"
+          [nzFooter]="footer"
+          style="width: 100%"
+        >
+          <thead>
+            <tr>
+              <th rowspan="2" width="5%" nzAlign="center">
+                {{ "Modules.Class.New.Tables.Day" | translate }}
+              </th>
+              <th colspan="2" width="15%">
+                {{ "Modules.Class.New.Tables.Date" | translate }}
+              </th>
+              <th colspan="2" width="15%">
+                {{ "Modules.Class.New.Tables.Hour" | translate }}
+              </th>
+              <th colspan="2" width="15%">
+                {{ "Modules.Class.New.Tables.Room" | translate }}
+              </th>
+              <th colspan="2" width="15%">
+                {{ "Modules.Class.New.Tables.Skill" | translate }}
+              </th>
+
+              <th
+                nzAlign="center"
+                nzWidth="100px"
+                rowspan="2"
+                width="10%"
+                nzAlign="center"
+              >
+                {{ "Modules.Class.New.Tables.Action" | translate }}
+              </th>
+            </tr>
+            <tr>
+              <th>A</th>
+              <th>HW</th>
+              <th>A</th>
+              <th>HW</th>
+              <th>A</th>
+              <th>HW</th>
+              <th>A</th>
+              <th>HW</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let data of weeklySessions; let i = index">
+              <tr>
+                <td nzAlign="center">{{ data.order }}</td>
+                <td>Yes</td>
+                <td>75%</td>
+                <td>Yes</td>
+
+                <td>75%</td>
+                <td>Yes</td>
+
+                <td>75%</td>
+                <td>Yes</td>
+
+                <td>75%</td>
+                <td class="text-center action-column">
+                  <a (click)="editWeeklySession(data, i)"
+                    ><span nz-icon nzType="edit" nzTheme="outline"></span
+                  ></a>
+                  <!-- <a (click)="deleteWeeklySession(data)"
+                    ><span
+                      class="action-icon"
+                      nz-icon
+                      nzType="delete"
+                      nzTheme="outline"
+                    ></span
+                  ></a> -->
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <ng-template #footer>
+            <button nz-button nzType="default" (click)="addStudent()">
+              {{ "Modules.Class.ClassDetail.Labels.AddStudent" | translate }}
+            </button>
+          </ng-template>
+        </nz-table>
+      </div>
+    </ng-container>
+  </ng-container>
+  <!-- END CONTENT -->
+</aio-template-layout>
+
+<!-- MODAL FOR ADD STUDENT -->
+<nz-modal
+  [(nzVisible)]="visibleAddStudentForm"
+  [nzTitle]="modalAddStudentTitle"
+  [nzContent]="modalAddStudentFormContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleAddStudentForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="600"
+>
+  <ng-template #modalAddStudentTitle class="text-center">
+    {{ "Modules.Class.ClassDetail.Labels.AddStudent" | translate }}
+  </ng-template>
+  <ng-template #modalAddStudentFormContent>
+    <aio-modal-add-student></aio-modal-add-student>
+  </ng-template>
+</nz-modal>
+<!-- END MODAL FOR ADD STUDENT -->
+
+<!-- MODAL FOR WEEKLY SESSION -->
+<nz-modal
+  [(nzVisible)]="visibleWeelySessionForm"
+  [nzTitle]="modalWeelySessionTitle"
+  [nzContent]="modalWeelySessionContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleWeelySessionForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="800"
+>
+  <ng-template #modalWeelySessionTitle class="text-center">
+    <span nz-icon nzType="setting" nzTheme="outline"></span>
+    {{ "Modules.Class.New.Tables.Day" | translate }}
+    {{ selectedWeeklySession.order }}
+  </ng-template>
+  <ng-template #modalWeelySessionContent>
+    <aio-modal-weekly-session
+      [selectedWeeklySession]="selectedWeeklySession"
+      [createClassForm]="classDetailForm.value"
+      [sessions]="sessions"
+      [classId]="classId"
+      [isEdit]="true"
+      (onCloseForm)="onCloseWeeklySessionForm($event)"
+      (onCancelForm)="visibleWeelySessionForm = false"
+    ></aio-modal-weekly-session>
+  </ng-template>
+
+  <!-- <ng-template #modalWeelySessionFooter>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="visibleWeelySessionForm = false"
+    >
+      {{ "Labels.Update" | translate }}
+    </button>
+  </ng-template> -->
+</nz-modal>
+<!-- END MODAL FOR WEEKLY SESSION -->
+
+<!-- MODAL FOR SESSION -->
+<nz-modal
+  [(nzVisible)]="visibleSessionForm"
+  [nzTitle]="modalSessionTitle"
+  [nzContent]="modalSessionContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleSessionForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="800"
+>
+  <ng-template #modalSessionTitle class="text-center">
+    {{ "Modules.Class.New.Tables.Day" | translate }} {{ selectedSession.order }}
+  </ng-template>
+  <ng-template #modalSessionContent>
+    <aio-modal-session
+      [selectedSession]="selectedSession"
+      [createClassForm]="classDetailForm.value"
+      [isEdit]="true"
+      (onCloseForm)="onCloseSessionForm($event)"
+      (onCancelForm)="visibleSessionForm = false"
+    ></aio-modal-session>
+  </ng-template>
+</nz-modal>
+<nz-modal
+  [(nzVisible)]="visibleAddSessionForm"
+  [nzTitle]="modalAddSessionTitle"
+  [nzContent]="modalAddSessionContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleAddSessionForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="800"
+>
+  <ng-template #modalAddSessionTitle class="text-center">
+    {{ "Modules.Class.ClassDetail.Tables.AddSession" | translate }}
+  </ng-template>
+  <ng-template #modalAddSessionContent>
+    <aio-modal-add-session
+      [weeklySessions]="weeklySessions"
+      [createClassForm]="classDetailForm.value"
+      (onCloseForm)="onCloseAddSessionForm($event)"
+      [sessions]="sessions"
+      (onCancelForm)="visibleAddSessionForm = false"
+    ></aio-modal-add-session>
+  </ng-template>
+
+  <ng-template #modalSessionFooter>
+    <button nz-button nzType="primary" (click)="visibleSessionForm = false">
+      {{ "Labels.Close" | translate }}
+    </button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="visibleAddTeachersRooms"
+  [nzTitle]="modalSessionAddTeachersRoomsTitle"
+  [nzContent]="modalSessionAddTeachersRooms"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleAddTeachersRooms = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="800"
+>
+  <ng-template #modalSessionAddTeachersRoomsTitle class="text-center">
+    {{ "Modules.Class.New.Buttons.AddTeachersAndRooms" | translate }}
+  </ng-template>
+  <ng-template #modalSessionAddTeachersRooms>
+    <aio-modal-add-teachers-rooms
+      [checkedSessions]="checkedSessions"
+      [createClassForm]="classDetailForm.value"
+      [isEdit]="true"
+      (onCloseForm)="onCloseSessionAddTeacherRoomForm($event)"
+      (onCancelForm)="visibleAddTeachersRooms = false"
+    ></aio-modal-add-teachers-rooms>
+  </ng-template>
+
+  <ng-template #modalSessionFooter>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="visibleAddTeachersRooms = false"
+    >
+      {{ "Labels.Close" | translate }}
+    </button>
+  </ng-template>
+</nz-modal>
+<!-- END MODAL FOR SESSION -->

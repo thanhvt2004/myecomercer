@@ -1,0 +1,58 @@
+@import '../../../../assets/style/color.scss';
+
+.schedule-container {
+    .header-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: self-end;
+        padding: 0 15px;
+        .title {
+            font-weight: 700;
+            font-size: 50px;
+            text-transform: uppercase;
+        }
+        .date-time {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+        }
+    }
+    .table-container {
+        margin-top: 10px;
+        ::ng-deep nz-table {
+            table {
+             thead {
+                 tr  {
+                     th {
+                         font-size: 35px;
+                         font-weight: 700;
+                         background-color: $bg-dark;
+                         color: $white-color
+                     }
+                    
+                 }
+             }
+             tbody {
+                 tr {
+                     color : $white-color;
+                     font-size: 22px;
+                     font-weight: 700;
+                 }
+                 tr:hover > td {
+                     background: unset ;
+                 }
+                 tr:nth-child(odd) {
+                     background: $bg-green;
+                 }
+                 tr:nth-child(even) {
+                     background: $bg-orange;
+                 }
+                     
+                 
+             }
+            }
+          }
+    }
+    
+        
+}

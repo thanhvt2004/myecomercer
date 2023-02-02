@@ -1,0 +1,89 @@
+<form nz-form [formGroup]="addStudentForm">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label>
+          {{ "Modules.Class.ClassDetail.Labels.Search" | translate }}
+        </nz-form-label>
+        <nz-form-control>
+          <nz-input-group [nzSuffix]="inputClearTpl">
+            <input
+              formControlName="search"
+              type="text"
+              nz-input
+              (ngModelChange)="onChangeSearchInput($event)"
+              placeholder="input with clear icon"
+            />
+          </nz-input-group>
+          <ng-template #inputClearTpl>
+            <span
+              nz-icon
+              class="ant-input-clear-icon"
+              nzTheme="fill"
+              nzType="close-circle"
+              *ngIf="isChangeInput"
+              (click)="onDeleteInput()"
+            ></span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <!-- <nz-form-item>
+                <nz-form-control  nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+                    <button nz-button nzType="primary" (click)="searchTeacher()"><span nz-icon nzType="search" nzTheme="outline"></span> {{ 'Modules.Class.New.Buttons.SearchTeacher' | translate }}</button>
+                </nz-form-control>
+            </nz-form-item> -->
+
+      <nz-table
+        class="w-auto-scroll"
+        [nzData]="students"
+        [nzBordered]="true"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th width="45%">
+              {{ "Modules.Class.ClassDetail.Tables.Student" | translate }}
+            </th>
+            <th width="35%">
+              {{ "Modules.Class.ClassDetail.Tables.PhoneNumber" | translate }}
+            </th>
+
+            <th
+              width="20%"
+              [nzChecked]="checked"
+              [nzIndeterminate]="indeterminate"
+              (nzCheckedChange)="onAllChecked($event)"
+            >
+              <!-- {{ "Modules.Class.ClassDetail.Tables.Action" | translate }} -->
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of students">
+            <tr>
+              <td class="avatar">
+                <img class="teacher-avatar" />
+                {{ data.name }}
+              </td>
+              <td>{{ data.phone }}</td>
+
+              <td
+                [nzChecked]="setOfCheckedId.has(data.id)"
+                (nzCheckedChange)="onItemChecked(data.id, $event)"
+              ></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <div class="button-container">
+    <button nz-button nzType="primary" (click)="addStudent()">
+      {{ "Labels.Save" | translate }}
+    </button>
+  </div>
+</form>

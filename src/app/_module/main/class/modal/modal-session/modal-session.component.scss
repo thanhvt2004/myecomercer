@@ -1,0 +1,42 @@
+@import '../../../../../../assets/style/global.scss';
+.teacher-avatar {
+  width: 35px;
+}
+
+.teacher-selected {
+  color: #303b70;
+  font-weight: bold;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+  flex-direction: row-reverse;
+}
+
+nz-form-item {
+  .time-picker-container {
+      display: flex;
+      gap: 20px;
+  }
+  nz-form-label {
+    display:flex;
+  }
+}
+.error-message{
+  display:flex;
+  align-items: center;
+  color: #F5222D;
+  font-size: 12px;
+  
+}
+.header-label {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 50px; 
+  text-transform: uppercase;
+}

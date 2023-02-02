@@ -1,0 +1,141 @@
+<form *ngIf="weeklySessionForm" nz-form [formGroup]="weeklySessionForm">
+  <!-- ROW 1 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="day"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Day" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="week_day"
+            id="day"
+            [nzShowArrow]="true"
+          >
+            <nz-option *ngFor="let o of days" [nzLabel]="o.id" [nzValue]="o.id">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="start_time"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Hour" | translate }}
+        </nz-form-label>
+        <div class="time-picker-container">
+          <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+            <nz-time-picker
+              nzStatus="error"
+              formControlName="day_start_time"
+              id="day_start_time"
+              nzFormat="HH:mm"
+              [nzHourStep]="1"
+              [nzMinuteStep]="5"
+              nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+            >
+            </nz-time-picker>
+
+            <div
+              class="ant-form-item-explain error-message"
+              *ngIf="
+                weeklySessionForm.errors &&
+                weeklySessionForm.value.day_start_time &&
+                weeklySessionForm.value.day_end_time
+              "
+            >
+              {{ "Messages.TimeInvalid" | translate }}
+            </div>
+          </nz-form-control>
+          <div>{{ "Modules.Class.New.Forms.To" | translate }}</div>
+          <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+            <nz-time-picker
+              nzStatus="error"
+              formControlName="day_end_time"
+              id="day_end_time"
+              nzFormat="HH:mm"
+              [nzHourStep]="1"
+              [nzMinuteStep]="5"
+              nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+            >
+            </nz-time-picker>
+          </nz-form-control>
+        </div>
+      </nz-form-item>
+    </div>
+  </div>
+  <!-- ROW 3 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="skill_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Skill" | translate }}
+        </nz-form-label>
+
+        <nz-form-control
+          nzErrorTip="{{
+            'Modules.Class.New.ErrorMessages.ClassName' | translate
+          }}"
+          nzXs="24"
+          nzSm="24"
+          nzMd="18"
+          nzLg="18"
+          nzXl="20"
+        >
+          <nz-select
+            nzDisabled
+            nzShowSearch
+            nzMode="multiple"
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="skill_ids"
+            id="skill_id"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let skill of skills"
+              [nzLabel]="skill.name"
+              [nzValue]="skill.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="button-container">
+    <button nz-button nzType="primary" (click)="onCloseWeeklySessionForm()">
+      {{ "Labels.Save" | translate }}
+    </button>
+    <button nz-button (click)="onCancel()">
+      {{ "Labels.Cancel" | translate }}
+    </button>
+  </div>
+</form>

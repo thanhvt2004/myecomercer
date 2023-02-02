@@ -1,0 +1,314 @@
+{
+  "Messages": {
+    "SystemError": "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
+    "AddNewSuccess": "Thêm mới thành công.",
+    "UpdateSuccess": "Cập nhật thành công.",
+    "DeleteSuccess": "Xóa bản ghi thành công.",
+    "404": "Không tồn tại, vui lòng kiểm tra lại.",
+    "403": "Không có quyền thực hiện, vui lòng kiểm tra lại.",
+    "TimeInvalid": "Vui lòng chọn lại giờ học.",
+    "SyllabusesError": "Vui lòng nhập thông tin syllabus."
+  },
+  "Labels": {
+    "Create": "Tạo mới",
+    "Update": "Cập nhật",
+    "Save": "Lưu",
+    "Delete": "Xóa",
+    "Close": "Đóng",
+    "Select": "---Lựa chọn---",
+    "DevelopedBy": "Phát triển bởi",
+    "Cancel": "Huỷ",
+    "ViewDetail": "Xem chi tiết",
+    "Collapse": "Thu gọn",
+    "Expand": "Mở rộng",
+    "Search": "Tìm kiếm",
+    "Clear": "Xoá",
+    "ReadMore": "Xem thêm",
+    "ReadLess": "Thu gọn",
+    "SearchTeacher": "Tìm giáo viên",
+    "Submit": "Gửi duyệt",
+    "Approve": "Phê duyệt",
+    "Reject": "Từ chối"
+  },
+  "Modules": {
+    "Menu": {
+      "Home": "Trang chủ",
+      "Dashboard": {
+        "Title": "Tổng quan",
+        "Teacher": "Giáo viên",
+        "Manager": "Quản lý"
+      },
+      "Class": {
+        "Title": "Lớp học",
+        "ClassList": "Danh sách lớp học",
+        "New": "Thêm lớp học",
+        "ClassDetail": "Lớp học",
+        "Schedule": "Lịch học",
+        "ClassSchedule": "Lịch học"
+      },
+      "Teacher": {
+        "Title": "Giáo viên",
+        "TeacherList": "Danh sách giáo viên",
+        "TeacherDetail": "Thông tin giáo viên",
+        "TeacherAdd": "Thêm giáo viên"
+      },
+      "Student": {
+        "Title": "Học viên",
+        "VisitorList": "Danh sách visitor",
+        "StudentList": "Danh sách học viên",
+        "FormRegister": "Form đăng ký",
+        "VisitorDetail": "Thông tin visitor "
+      },
+      "Report": {
+        "Title": "Báo cáo",
+        "Teacher": "Giáo viên"
+      },
+      "Setting": {
+        "Title": "Cài đặt",
+        "Salary": "Bậc lương",
+        "Skill": "Kỹ năng"
+      }
+    },
+    "Class": {
+      "ClassList": {
+        "Labels": {
+          "StartDate": "Từ ngày",
+          "EndDate": "Đến ngày",
+          "Teachers": "Giáo viên",
+          "Rooms": "Phòng học"
+        },
+        "Buttons": {},
+        "Tables": {
+          "Code": "Mã lớp",
+          "Course": "Khoá học",
+          "Date": "Ngày học",
+          "Teacher": "Giáo viên",
+          "Room": "Phòng học",
+          "Process": "Tiến độ",
+          "Action": "Hành động",
+          "Time": "Thời gian",
+          "Student": "Học sinh"
+        }
+      },
+      "ClassDetail": {
+        "Labels": {
+          "ClassDetail": "Lớp học",
+          "StudentList": "Danh sách học viên",
+          "AddStudent": "Thêm học viên",
+          "Search": "Tìm kiếm",
+          "SessionType": "Loại buổi học",
+          "Sessions": "Các buổi học",
+          "Schedule": "Lịch học",
+          "TopicTheme": "Topic/Theme",
+          "LessonContent": "Nội dung buổi học"
+        },
+        "Tables": {
+          "Student": "Học viên",
+          "PhoneNumber": "Số điện thoại",
+          "Action": "Hành động",
+          "AddSession": "Thêm buổi học"
+        }
+      },
+      "New": {
+        "ErrorMessages": {
+          "ClassName": "Vui lòng nhập tên lớp.",
+          "WeekDay": "Vui lòng nhập ngày học.",
+          "StartTime": "Vui lòng nhập thời gian bắt đầu.",
+          "EndTime": "Vui lòng nhập thời gian kết thúc.",
+          "Room": "Vui lòng nhập phòng học.",
+          "Code": "Vui lòng nhập mã lớp.",
+          "StartDate": "Vui lòng chọn ngày bắt đầu.",
+          "Course": "Vui lòng chọn khoá học.",
+          "Level": "Vui lòng chọn trình độ.",
+          "Module": "Vui lòng chọn cấp độ.",
+          "Syllabus": "Vui lòng chọn syllabus."
+        },
+        "Forms": {
+          "ClassName": "Tên lớp",
+          "ClassCode": "Mã lớp",
+          "StartDate": "Ngày bắt đầu",
+          "IsFixed": "Lịch học cố định",
+          "Course": "Khóa học",
+          "Level": "Trình độ",
+          "Module": "Cấp độ",
+          "Syllabus": "Syllabus",
+          "Now": "Bây giờ",
+          "To": "Đến"
+        },
+        "Tables": {
+          "Day": "Buổi",
+          "Date": "Ngày học",
+          "Hour": "Giờ học",
+          "Skill": "Kỹ năng",
+          "Room": "Phòng học",
+          "Teacher": "Giáo viên",
+          "Action": "Hành động",
+          "TeachingHour": "Giờ dạy",
+          "Contract": "Hợp đồng",
+          "DayNumber": "Buổi học thứ",
+          "Select": "Chọn",
+          "Type": "Kiểu",
+          "Unit": "Unit",
+          "Others": "Giáo viên Khác"
+        },
+        "Buttons": {
+          "GenerateData": "Tạo dữ liệu",
+          "SearchTeacher": "Tìm giáo viên",
+          "AddWeeklySection": "Thêm buổi học",
+          "AddDate": "Thiết lập ngày học",
+          "AddTeachersAndRooms": "Thiết lập giáo viên và phòng học"
+        },
+        "Filter": {
+          "ClassDay": "Ngày học",
+          "Teacher": "Giáo viên",
+          "Skill": "Kỹ năng",
+          "FromTime": "Thời gian từ",
+          "ToTime": "Đến",
+          "Search": "Tìm kiếm"
+        }
+      },
+      "Syllabus": {
+        "DurationHours": "Duration hour(s)",
+        "ClassHours": "Class hour(s)",
+        "TestingHours": "Testing hour(s)",
+        "TutoringTours": "Tutoring hour(s)",
+        "CourseBook": "Course book",
+        "CourseBookDesciption": "Course book description",
+        "SupplementaryMaterials": "Supplementary Materials",
+        "TeacherReference": "Teacher's Reference",
+        "CourseObjectives": "Course Objectives",
+        "LearningOutcomes": "Learning Outcomes",
+        "Asssement": "Asssement"
+      }
+    },
+    "Teacher": {
+      "Code": "Mã GV",
+      "ClassCode": "Mã lớp học",
+      "Classes": "Lớp học",
+      "Skills": "Kĩ năng",
+      "Teacher": "Giáo viên",
+      "Type": "Quốc tịch",
+      "Salary": "Bậc lương",
+      "Kpi": "Kpi",
+      "Level": "Trình độ",
+      "Process": "Tiến độ dạy hiện tại",
+      "Action": "Hành động",
+      "FirstName": "Tên",
+      "MiddleName": "Tên đệm",
+      "LastName": "Họ",
+      "Email": "Email",
+      "Phone": "Số điện thoại",
+      "Address": "Địa chỉ",
+      "DateOfBirth": "Ngày sinh",
+      "Gender": "Giới tính",
+      "Male": "Nam",
+      "Female": "Nữ",
+      "Course": "Khoá học",
+      "Time": "Thời gian",
+      "Status": "Trạng thái",
+      "Room": "Phòng học",
+      "Local": "Việt Nam",
+      "Foreigner": "Nước ngoài",
+      "Contract": "Hợp đồng",
+      "FullTime": "Toàn thời gian",
+      "PartTime": "Bán thời gian",
+      "KpiTeaching": "Kpi giờ dạy",
+      "KpiAdmin": "Kpi giờ Admin",
+      "RankSalary": "Bậc lương",
+      "LevelsSkills": "Trình độ, Kỹ năng",
+      "Information": "Thông tin",
+      "Schedule": "Lịch",
+      "SalaryTeaching": "Lương/ giờ dạy",
+      "Message": {
+        "EmailInValid": "Vui lònd nhập lại email.",
+        "UpdateTeacherSuccess": "Cập nhật thông tin giáo viên thành công!",
+        "UpdateTeacherFailed": "Cập nhật thông tin giáo viên thất bại!",
+        "CreateTeacherSuccess": "Tạo mới thông tin giáo viên thành công!"
+      }
+    },
+    "Student": {
+      "ErrorMessages": {
+        "FullName": "Vui lòng nhập họ và tên"
+      },
+      "StudentCode": "Mã HV",
+      "Student": "Học viên",
+      "Phone": "Số điện thoại",
+      "CurrentClass": "Lớp học hiện tại",
+      "Process": "Tiến độ",
+      "FullName": "Họ và tên",
+      "Gender": "Giới tính",
+      "Status": "Trạng thái",
+      "Purposes": "Mục đích",
+      "Date": "Ngày ĐK",
+      "Manager": "Người thực hiện",
+      "Action": "Hành động",
+      "Male": "Nam",
+      "Female": "Nữ",
+      "DateOfBirth": "Ngày sinh",
+      "School": "Trường học",
+      "Address": "Địa chỉ",
+      "Email": "Email",
+      "ParentName": "Tên bố mẹ",
+      "ParentPhone": "SĐT bố mẹ",
+      "Demand": "Nhu cầu",
+      "Select": "Lựa chọn",
+      "ClassCode": "Mã lớp",
+      "Course": "Khóa học",
+      "Time": "Thời gian",
+      "Room": "Phòng học",
+      "Progress": "Tiến độ",
+      "History": {
+        "TargetCourse": "Khóa học",
+        "TargetClass": "Đăng ký VIP",
+        "Note": "Ghi chú",
+        "Title": "Lịch sử"
+      },
+      "Test": {
+        "Date": "Ngày",
+        "TotalScore": "Tổng điểm",
+        "Course": "Khóa học",
+        "SaleCare": "Tư vấn",
+        "DateOfTest": "Ngày test",
+        "Note": "Ghi chú",
+        "Skill": "Kỹ năng",
+        "Score": "Điểm",
+        "Teacher": "Giáo viên",
+        "Title": "Lộ trình"
+      },
+      "StudyRoute": {
+        "Module": "Cấp độ",
+        "GenerateData": "Tạo dữ liệu",
+        "Course": "Khoá học",
+        "Hours": "Hours",
+        "TimeLine": "Time Line",
+        "Fee": "Fee"
+      },
+      "Message": {
+        "UpdateVisitorSuccess": "Cập nhật học viên thành công!",
+        "UpdateVisitorFailed": "Cập nhật học viên thất bại!",
+        "CreateVisitorSuccess": "Thêm mới học viên thành công!",
+        "UpdateStudentSuccess": "Cập nhật học viên thành công!",
+        "UpdateStudentFailed": "Cập nhật học viên thất bại!",
+        "CreateStudentSuccess": "Thêm mới học viên thành công!"
+      }
+    }
+  },
+  "ApiResponseMessages": {
+    "Class": {
+      "New": {
+        "400-000-001": "Test Error"
+      }
+    }
+  },
+  "KendoUI": {
+    "Calendar": {
+      "Today": "Hôm nay",
+      "AllDay": "Cả ngày",
+      "DayViewTitle": "Ngày",
+      "WeekViewTitle": "Tuần",
+      "MonthViewTitle": "Tháng",
+      "ShowWorkDay": "Thời gian làm việc",
+      "ShowFullDay": "Thời gian cả ngày"
+    }
+  }
+}

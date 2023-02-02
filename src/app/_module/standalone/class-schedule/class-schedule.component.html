@@ -1,0 +1,59 @@
+<div class="schedule-container">
+  <div class="header-container">
+    <div>
+      <img class="logo" src="./assets/images/logo-background.svg" alt="logo" />
+    </div>
+    <div class="title">
+      {{ "Modules.Menu.Class.ClassSchedule" | translate }}
+      <!-- Class Schedule -->
+    </div>
+    <div class="date-time">Thursday, 16/6/2022</div>
+  </div>
+  <div class="table-container">
+    <nz-table
+      #scheduleListTable
+      class="ant-table"
+      [nzData]="scheduleList"
+      [nzBordered]="true"
+      [nzFrontPagination]="false"
+      style="width: 100%"
+    >
+      <thead>
+        <tr>
+          <th width="20%">
+            {{ "Modules.Class.ClassList.Tables.Teacher" | translate }}
+          </th>
+          <th width="30%">
+            {{ "Modules.Class.ClassList.Tables.Student" | translate }}
+          </th>
+          <th width="20%">
+            {{ "Modules.Class.ClassList.Tables.Time" | translate }}
+          </th>
+          <th width="20%">
+            {{ "Modules.Class.ClassList.Tables.Room" | translate }}
+          </th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngFor="let data of scheduleListTable.data; let i = index"
+        >
+          <tr>
+            <td>{{ data.teacher_full_name }}</td>
+            <td>{{ data.class_name }}</td>
+            <td>
+              {{ data.start_time_unix | formatTimeStampUnixToHour }} -
+              {{ data.end_time_unix | formatTimeStampUnixToHour }}
+            </td>
+            <td>
+              {{ data.room_name }}
+            </td>
+
+            <td></td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  smartschool-web:
+    image: havina/smartschool-web:0.1${ENVIRONMENT_SUFFIX}
+    ports:
+      - "${WEB_PORT:-4200}:80"
+    restart: unless-stopped

@@ -1,0 +1,101 @@
+@import '../../../../assets/style/color.scss';
+
+.form-visitor-container {
+    background-image: url('../../../../assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    .form-container {     
+        width: 70%;
+        border: 1px solid $border-orange;
+        background-color: $bg-white;
+        border-radius: 10px;
+        margin: 20rem 0 70px 0;
+        opacity: 0.95;
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 40px 0;
+            .title {
+                font-size: 35px;
+                font-weight: 700;
+            }
+        }
+        form {
+            
+            .form-row-item {
+                // padding: 0 40px;
+                .description {
+                 text-align: justify;
+                 font-weight: 700;
+                }
+                .text-thanks {
+                   font-weight: 700; 
+                   text-align: center;
+                }
+                 nz-form-label {
+                     display: flex;
+                     font-weight: 700;
+                     span {
+                         font-weight: 400;
+                         font-size: 12px;
+                     }
+                 }
+                 nz-checkbox-wrapper {
+                    label {
+                        font-weight: 700;
+                        span {
+                            font-weight: 400;
+                            font-size: 12px;
+                        }
+                    }
+                 }
+                
+     
+                 .button-container {
+                     display: flex;
+                     justify-content: center;
+                     margin: 20px 0 40px 0;;
+                 }
+             }
+        }
+    }
+}
+
+@media (min-width:576px) and (max-width: 992px) { 
+    .form-visitor-container { 
+        .form-container {
+            margin: 10rem 0 70px 0;
+            form {
+               padding: 0 1rem;
+            }
+        }
+    }
+ }
+
+ @media (min-width:992px) and (max-width: 1200px) { 
+    .form-visitor-container { 
+        .form-container {
+            margin: 13rem 0 70px 0;
+            form {
+               padding: 0 ;
+            }
+        }
+    }
+ }
+
+ @media (min-width:1600px)  { 
+    .form-visitor-container { 
+        .form-container {
+            margin: 24rem 0 70px 0;
+            form {
+               padding: 0 4rem;
+            }
+        }
+    }
+ }

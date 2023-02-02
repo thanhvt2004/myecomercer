@@ -1,0 +1,312 @@
+{
+  "Messages": {
+    "SystemError": "Sorry, something went wrong. Please contact administrator.",
+    "AddNewSuccess": "Add new successfully.",
+    "UpdateSuccess": "Update successfully.",
+    "DeleteSuccess": "Delete successfully.",
+    "404": "Not found, please check again.",
+    "403": "You don't have permission, please check again.",
+    "TimeInvalid": "Time invalid. Please try again!",
+    "SyllabusesError": "Please update data for syllabus."
+  },
+  "Labels": {
+    "Create": "Create",
+    "Update": "Update",
+    "Save": "Save",
+    "Delete": "Delete",
+    "Close": "Close",
+    "Select": "---Select---",
+    "DevelopedBy": "Developed by",
+    "Cancel": "Cancel",
+    "ViewDetail": "View Detail",
+    "Collapse": "Collapse",
+    "Expand": "Expand",
+    "Search": "Search",
+    "Clear": "Clear",
+    "ReadMore": "Read more",
+    "ReadLess": "Read less",
+    "SearchTeacher": "Search teacher",
+    "Submit": "Submit",
+    "Approve": "Approve",
+    "Reject": "Reject"
+  },
+  "Modules": {
+    "Menu": {
+      "Home": "Home page",
+      "Dashboard": {
+        "Title": "Dashboard",
+        "Teacher": "Teacher",
+        "Manager": "Manager"
+      },
+      "Class": {
+        "Title": "Class",
+        "ClassList": "Classes",
+        "New": "Add new",
+        "ClassDetail": "Class detail",
+        "Schedule": "Schedule",
+        "ClassSchedule": "Class Schedule"
+      },
+      "Teacher": {
+        "Title": "Teacher",
+        "TeacherList": "Teachers",
+        "TeacherDetail": "Teacher Detail",
+        "TeacherAdd": "Add new"
+      },
+      "Student": {
+        "Title": "Student",
+        "VisitorList": "Visitors",
+        "VisitorDetail": "Visitor Detail",
+        "StudentList": "Students",
+        "FormRegister": "Form Resgiter"
+      },
+      "Report": {
+        "Title": "Report",
+        "Teacher": "Teacher"
+      },
+      "Setting": {
+        "Title": "Setting",
+        "Salary": "Salary",
+        "Skill": "Skill"
+      }
+    },
+    "Class": {
+      "ClassList": {
+        "Labels": {
+          "StartDate": "Start Date",
+          "EndDate": "End Date",
+          "Teachers": "Teachers",
+          "Rooms": "Rooms"
+        },
+        "Buttons": {},
+        "Tables": {
+          "Code": "Code",
+          "Course": "Course",
+          "Date": "Date",
+          "Teacher": "Teacher",
+          "Room": "Room",
+          "Process": "Process",
+          "Action": "Action",
+          "Time": "Time",
+          "Student": "Student"
+        }
+      },
+      "ClassDetail": {
+        "Labels": {
+          "ClassDetail": "Detail",
+          "StudentList": "Student List",
+          "AddStudent": "Add Student",
+          "Search": "Search",
+          "SessionType": "Session Type",
+          "Sessions": "Sessions",
+          "Schedule": "Schedule",
+          "TopicTheme": "Topic/Theme",
+          "LessonContent": "Lesson Content"
+        },
+        "Tables": {
+          "Student": "Student",
+          "PhoneNumber": "Phone Number",
+          "Action": "Action",
+          "AddSession": "Add Session"
+        }
+      },
+      "New": {
+        "ErrorMessages": {
+          "ClassName": "Name is required.",
+          "WeekDay": "Day is required.",
+          "StartTime": "Start time is required.",
+          "EndTime": "End time is required.",
+          "Room": "Room is required.",
+          "Code": "Code is required.",
+          "StartDate": "Start date is required.",
+          "Course": "Course is required.",
+          "Level": "Level is required.",
+          "Module": "Module is required.",
+          "Syllabus": "Syllabus is required."
+        },
+        "Forms": {
+          "ClassName": "Class Name",
+          "ClassCode": "Class Code",
+          "StartDate": "Start Date",
+          "IsFixed": "Fix",
+          "Course": "Course",
+          "Level": "Level",
+          "Module": "Module",
+          "Syllabus": "Syllabus",
+          "Now": "Now",
+          "To": "To"
+        },
+        "Tables": {
+          "Day": "Day",
+          "Date": "Date",
+          "Hour": "Hour",
+          "Skill": "Skill",
+          "Room": "Room",
+          "Teacher": "Teacher",
+          "Action": "Action",
+          "TeachingHour": "Teaching hours",
+          "Contract": "Contract",
+          "DayNumber": "Day",
+          "Select": "Select",
+          "Type": "Type",
+          "Unit": "Unit",
+          "Others": "Others"
+        },
+        "Buttons": {
+          "GenerateData": "Generate data",
+          "SearchTeacher": "Search Teacher",
+          "AddWeeklySection": "Add Weekly Section",
+          "AddDate": "Add Date",
+          "AddTeachersAndRooms": "Add Teachers And Rooms"
+        },
+        "Filter": {
+          "ClassDay": "Class day",
+          "Teacher": "Teacher",
+          "Skill": "Skill",
+          "FromTime": "From Time",
+          "ToTime": "To Time",
+          "Search": "Search"
+        }
+      },
+      "Syllabus": {
+        "DurationHours": "Duration hour(s)",
+        "ClassHours": "Class hour(s)",
+        "TestingHours": "Testing hour(s)",
+        "TutoringTours": "Tutoring hour(s)",
+        "CourseBook": "Course book",
+        "CourseBookDesciption": "Course book description",
+        "SupplementaryMaterials": "Supplementary Materials",
+        "TeacherReference": "Teacher's Reference",
+        "CourseObjectives": "Course Objectives",
+        "LearningOutcomes": "Learning Outcomes",
+        "Asssement": "Asssement"
+      }
+    },
+    "Teacher": {
+      "Code": "Code",
+      "ClassCode": "Class Code",
+      "Classes": "Classes",
+      "Skills": "Skills",
+      "Teacher": "Teacher",
+      "Type": "Type",
+      "Salary": "Salary",
+      "Kpi": "Kpi",
+      "Level": "Level",
+      "Process": "Process",
+      "Action": "Action",
+      "FirstName": "First Name",
+      "MiddleName": "Middle Name",
+      "LastName": "Last Name",
+      "Email": "Email",
+      "Phone": "Phone",
+      "Address": "Address",
+      "DateOfBirth": "Date Of Birth",
+      "Gender": "Gender",
+      "Male": "Male",
+      "Female": "Female",
+      "Course": "Courses",
+      "Time": "Time",
+      "Status": "Status",
+      "Room": "Room",
+      "Local": "Local",
+      "Foreigner": "Foreigner",
+      "Contract": "Contract",
+      "FullTime": "Full time",
+      "PartTime": "Part time",
+      "KpiTeaching": "Kpi Teaching Hours",
+      "KpiAdmin": "Kpi Admin Hours",
+      "RankSalary": "Rank Salary",
+      "LevelsSkills": "Levels, Skills",
+      "Information": "Information",
+      "Schedule": "Schedule",
+      "SalaryTeaching": "Salary Per Teaching Hour",
+      "Message": {
+        "EmailInValid": "Invalid Email.",
+        "UpdateTeacherSuccess": "Update teacher information successfully!",
+        "UpdateTeacherFailed": "Update teacher information failed!",
+        "CreateTeacherSuccess": "Create teacher information successfully!"
+      }
+    },
+    "Student": {
+      "StudentCode": "Student Code",
+      "Student": "Student name",
+      "Phone": "Phone",
+      "CurrentClass": "Current class",
+      "Process": "Process",
+      "FullName": "Full name",
+      "Gender": "Gender",
+      "Status": "Status",
+      "Purposes": "Purposes",
+      "Date": "Date",
+      "Manager": "Manager",
+      "Action": "Action",
+      "Male": "Male",
+      "Female": "Female",
+      "DateOfBirth": "Date Of Birth",
+      "School": "School",
+      "Address": "Address",
+      "Email": "Email",
+      "ParentName": "Parent's Name",
+      "ParentPhone": "Parent's Phone",
+      "Demand": "Demand",
+      "Select": "Select",  
+      "ClassCode": "Code",
+      "Course": "Course",
+      "Time": "Time",
+      "Room": "Room",
+      "Progress": "Progress",
+      "History": {
+        "TargetCourse": "Target course",
+        "TargetClass": "Target class",
+        "Note": "Note",
+        "Title": "History"
+      },
+      "Test": {
+        "Date": "Date",
+        "TotalScore": "Total Score",
+        "Course": "Course",
+        "SaleCare": "Sale Care",
+        "DateOfTest": "Date of test",
+        "Note": "Note",
+        "Skill": "Skill",
+        "Score": "Score",
+        "Teacher": "Teacher",
+        "Title": "Entrance test"
+      },
+      "StudyRoute": {
+        "Module": "Module",
+        "GenerateData": "Tạo dữ liệu",
+        "Course": "Khoá học",
+        "Hours": "Hours",
+        "TimeLine": "Time Line",
+        "Fee": "Fee"
+      },
+      "Message": {
+        "UpdateVisitorSuccess": "Update visitor information successfully!",
+        "UpdateVisitorFailed": "Update visitor information failed!",
+        "CreateVisitorSuccess": "Create visitor information successfully!",
+        "UpdateStudentSuccess": "Update student information successfully!",
+        "UpdateStudentFailed": "Update student information failed!",
+        "CreateStudentSuccess": "Create student information successfully!"
+      }
+    }
+  },
+  "ApiResponseMessages": {
+    "Class": {
+      "New": {
+        "400-000-001": "Test Error",
+        "200-000-000": "OK"
+      }
+    }
+  },
+  "KendoUI": {
+    "Calendar": {
+      "Today": "Today",
+      "AllDay": "all day",
+      "DayViewTitle": "Day",
+      "WeekViewTitle": "Week",
+      "MonthViewTitle": "Month",
+      "ShowWorkDay": "Show business hours",
+      "ShowFullDay": "Show full day"
+    }
+  }
+}

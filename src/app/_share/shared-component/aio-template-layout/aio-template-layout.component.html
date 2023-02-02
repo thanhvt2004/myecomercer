@@ -1,0 +1,21 @@
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="inner-box bread-crumb">
+            <ng-content select=[breadcrumbTemplate]></ng-content>
+        </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="inner-box action-bar">
+            <ng-content select=[actionBarTemplate]></ng-content>
+        </div>
+    </div>
+</div>
+<div class="inner-content">
+    <div class="page-title">
+        <ng-content select=[pageTitleTemplate]></ng-content>
+    </div>
+    <ng-content select=[contentTemplate]></ng-content>
+    <div class="footer-action">
+        <ng-content select=[footerTemplate]></ng-content>
+    </div>
+</div>

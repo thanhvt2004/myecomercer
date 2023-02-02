@@ -1,0 +1,25 @@
+<kendo-scheduler
+  [kendoSchedulerBinding]="events"
+  [selectedDate]="selectedDate"
+  [weekStart]="weekStart"
+  startTime="07:00"
+  endTime="22:00"
+  style="height: 700px"
+>
+  <kendo-scheduler-day-view> </kendo-scheduler-day-view>
+
+  <kendo-scheduler-week-view> </kendo-scheduler-week-view>
+
+  <kendo-scheduler-month-view></kendo-scheduler-month-view>
+
+  <kendo-scheduler-messages
+    today="{{ 'KendoUI.Calendar.Today' | translate }}"
+    allDay="{{ 'KendoUI.Calendar.AllDay' | translate }}"
+    dayViewTitle="{{ 'KendoUI.Calendar.DayViewTitle' | translate }}"
+    weekViewTitle="{{ 'KendoUI.Calendar.WeekViewTitle' | translate }}"
+    monthViewTitle="{{ 'KendoUI.Calendar.MonthViewTitle' | translate }}"
+    showWorkDay="{{ 'KendoUI.Calendar.ShowWorkDay' | translate }}"
+    showFullDay="{{ 'KendoUI.Calendar.ShowFullDay' | translate }}"
+  >
+  </kendo-scheduler-messages>
+</kendo-scheduler>

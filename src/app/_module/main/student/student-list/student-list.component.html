@@ -1,0 +1,199 @@
+<aio-template-layout>
+  MYPA workkkk
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a [routerLink]="['student/student-list']">{{
+          "Modules.Menu.Student.StudentList" | translate
+        }}</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- ACTION BAR -->
+  <!-- <ng-container actionBarTemplate>
+      <button nz-button nzType="primary" (click)="createVisitor()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i
+        >{{ "Labels.Create" | translate }}
+      </button>
+    </ng-container> -->
+  <!-- END ACTION BAR -->
+
+  <!-- PAGE TITLE -->
+  <ng-container pageTitleTemplate> </ng-container>
+  <!-- END PAGE TITLE -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <form
+      *ngIf="searchStudentForm"
+      nz-form
+      [formGroup]="searchStudentForm"
+      class="ant-advanced-search-form"
+    >
+      <div class="form-container">
+        <div class="form-item-container">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.StartDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                style="width: 100%"
+                formControlName="startDate"
+                [nzFormat]="dateFormat"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label style="margin-left: 15px" [nzFor]=""
+              >{{ "Modules.Class.ClassList.Labels.EndDate" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-date-picker
+                style="width: 100%"
+                [nzFormat]="dateFormat"
+                formControlName="endDate"
+              ></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-item-container"></div>
+      </div>
+      <ng-container *ngIf="!isCollapse">
+        <div class="form-container">
+          <nz-form-item class="form-item-container">
+            <nz-form-label [nzFor]="">
+              {{ "Modules.Class.New.Forms.ClassCode" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <input nz-input formControlName="code" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item-container">
+            <nz-form-label>
+              {{ "Modules.Class.New.Forms.Course" | translate }}
+            </nz-form-label>
+            <nz-form-control>
+              <nz-select
+                (ngModelChange)="onCoursesChange($event)"
+                nzShowSearch
+                nzMode="multiple"
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="course_ids"
+                [nzShowArrow]="true"
+              >
+                <nz-option
+                  *ngFor="let course of courses"
+                  [nzLabel]="course.name"
+                  [nzValue]="course.id"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="form-container">
+          <nz-form-item class="form-item-container"> </nz-form-item>
+        </div>
+      </ng-container>
+
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button nz-button [nzType]="'primary'" (click)="onSearchStudent()">
+            <span nz-icon nzType="search" nzTheme="outline"></span>
+            {{ "Labels.Search" | translate }}
+          </button>
+          <button
+            nz-button
+            nzType="text"
+            class="collapse"
+            (click)="toggleCollapse()"
+          >
+            <span *ngIf="!isCollapse">{{ "Labels.Collapse" | translate }}</span>
+            <span *ngIf="isCollapse">{{ "Labels.Expand" | translate }}</span>
+            <i nz-icon [nzType]="isCollapse ? 'down' : 'up'"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="search-result-list">
+      <nz-table
+        #studentListTable
+        class="w-auto-scroll"
+        [nzData]="studentList"
+        [nzBordered]="true"
+        [nzPageSize]="pageSize"
+        style="width: 100%"
+        [nzPageSizeOptions]="[10, 20, 30, 40, 50, 100, 200]"
+        nzShowSizeChanger
+      >
+        <thead>
+          <tr>
+            <th width="20%">
+              {{ "Modules.Student.StudentCode" | translate }}
+            </th>
+            <th width="15%">
+              {{ "Modules.Student.Student" | translate }}
+            </th>
+            <th width="15%">
+              {{ "Modules.Student.Phone" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Student.CurrentClass" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Student.Process" | translate }}
+            </th>
+
+            <th width="10%" nzAlign="center">
+              {{ "Modules.Student.Action" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let data of studentListTable.data; let i = index"
+          >
+            <tr>
+              <td>{{ data.code }}</td>
+              <td>{{ data.full_name }}</td>
+              <td>
+                {{ data.mobile_phone }}
+              </td>
+              <td>
+                {{ data.current_school }}
+              </td>
+              <td>
+                {{ data.status }}
+              </td>
+
+              <td nzAlign="center">
+                <span
+                  (click)="onClickDetailStudent(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="eye"
+                  nzTheme="outline"
+                ></span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+  <!-- END CONTENT -->
+</aio-template-layout>

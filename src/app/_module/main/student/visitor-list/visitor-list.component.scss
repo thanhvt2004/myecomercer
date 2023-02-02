@@ -1,0 +1,54 @@
+@import '../../../../../assets/style/color.scss';
+
+.ant-advanced-search-form {
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+  }
+
+  .search-result-list {
+    margin-top: 16px;
+    border: 1px border $border-color;
+    border-radius: 6px;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  .search-area {
+    display: flex;
+    gap: 7px;
+  }
+
+  form {
+    .form-container {
+      display: flex;
+      gap : 40px;
+      .form-item-container {
+        width: 50%;
+        display :flex;
+       
+        .form-item {
+          width: 50%;
+          display: flex;
+          
+          nz-form-label {
+            width: 50%;
+            display:flex;         
+          }
+          nz-form-control {
+            width: 50%
+          }
+        }
+        nz-form-label {
+            width: 25%;
+            display:flex;         
+        }
+        nz-form-control {
+          width: 75%
+        }
+        
+      }
+    }
+  }

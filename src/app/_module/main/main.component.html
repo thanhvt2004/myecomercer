@@ -1,0 +1,45 @@
+<nz-layout class="app-layout main-header">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div
+      class="sidebar-logo"
+      [style]="isCollapsed ? 'padding-left:17px' : 'padding-left:24px;'"
+    >
+      <a href="#" target="_blank">
+        <img class="logo" src="./assets/images/logo-only.png" alt="logo" />
+        <img
+          *ngIf="!isCollapsed"
+          class="text"
+          src="./assets/images/text-only.png"
+          alt="logo"
+        />
+        <!-- <h1>HAVINA</h1> -->
+      </a>
+    </div>
+
+    <!-- LEFT MENU -->
+    <div class="aio-sidebar">
+      <aio-sidebar [isCollapsed]="isCollapsed"></aio-sidebar>
+    </div>
+
+    <!-- END LEFT MENU -->
+  </nz-sider>
+
+  <nz-layout>
+    <app-cpn-header
+      [isCollapsed]="isCollapsed"
+      (changeMenu)="changeMenu($event)"
+    ></app-cpn-header>
+    <nz-content class="layout-container">
+      <block-ui>
+        <router-outlet></router-outlet>
+      </block-ui>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

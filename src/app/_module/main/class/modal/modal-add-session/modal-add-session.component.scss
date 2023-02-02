@@ -1,0 +1,30 @@
+
+  
+  .teacher-selected {
+    color: #303b70;
+    font-weight: bold;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+  }
+  
+  nz-form-item {
+    .time-picker-container {
+        display: flex;
+        gap: 20px;
+    }
+  }
+  .error-message{
+    display:flex;
+    align-items: center;
+    color: #F5222D;
+    font-size: 12px;
+    
+  }

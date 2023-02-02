@@ -1,0 +1,29 @@
+  
+  @import "../../../../../../assets/style/color.scss";
+
+  .teacher-selected {
+    color: #303b70;
+    font-weight: bold;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+
+  .read-more-button{
+    font-size: 13px;
+    text-decoration: underline;
+    cursor:pointer;
+    color: $primary-color;
+  }
+  

@@ -1,0 +1,183 @@
+<aio-template-layout>
+  MYPA workkkk
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a [routerLink]="['student/visitor']">{{
+          "Modules.Menu.Student.VisitorList" | translate
+        }}</a>
+      </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- ACTION BAR -->
+  <ng-container actionBarTemplate>
+    <button nz-button nzType="primary" (click)="createVisitor()">
+      <i nz-icon nzType="plus" nzTheme="outline"></i
+      >{{ "Labels.Create" | translate }}
+    </button>
+  </ng-container>
+  <!-- END ACTION BAR -->
+
+  <!-- PAGE TITLE -->
+  <ng-container pageTitleTemplate> </ng-container>
+  <!-- END PAGE TITLE -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <form
+      *ngIf="searchVisitorForm"
+      nz-form
+      [formGroup]="searchVisitorForm"
+      class="ant-advanced-search-form"
+    >
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label [nzFor]="">
+            {{ "Modules.Student.FullName" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="full_name" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="form-item-container">
+          <nz-form-label>
+            {{ "Modules.Student.Status" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzShowSearch
+              nzMode="multiple"
+              nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+              formControlName="status"
+              [nzShowArrow]="true"
+            >
+              <nz-option
+                *ngFor="let s of status"
+                [nzLabel]="s.name"
+                [nzValue]="s.id"
+              >
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label [nzFor]="">
+            {{ "Modules.Student.Phone" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="mobile_phone" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="form-item-container">
+          <nz-form-label [nzFor]="">
+            {{ "Modules.Student.Purposes" | translate }}
+          </nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzMode="multiple"
+              nzShowSearch
+              nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+              formControlName="purposes"
+              [nzShowArrow]="true"
+            >
+              <nz-option
+                *ngFor="let p of studentStudyPurpose"
+                [nzValue]="p.id"
+                [nzLabel]="p.value"
+              >
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button nz-button [nzType]="'primary'" (click)="onSearchVisitor()">
+            <span nz-icon nzType="search" nzTheme="outline"></span>
+            {{ "Labels.Search" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="search-result-list">
+      <nz-table
+        #visitorListTable
+        class="w-auto-scroll"
+        [nzData]="visitorList"
+        [nzBordered]="true"
+        [nzPageSize]="pageSize"
+        style="width: 100%"
+        [nzPageSizeOptions]="[10, 20, 30, 40, 50, 100, 200]"
+        nzShowSizeChanger
+      >
+        <thead>
+          <tr>
+            <th width="20%">
+              {{ "Modules.Student.FullName" | translate }}
+            </th>
+            <th width="15%">
+              {{ "Modules.Student.Date" | translate }}
+            </th>
+            <th width="15%">
+              {{ "Modules.Student.Phone" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Student.Status" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Student.Manager" | translate }}
+            </th>
+
+            <th width="10%" nzAlign="center">
+              {{ "Modules.Student.Action" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let data of visitorListTable.data; let i = index"
+          >
+            <tr>
+              <td>{{ data.full_name }}</td>
+              <td>{{ data.enquired_date | stringReplace }}</td>
+              <td>
+                {{ data.mobile_phone }}
+              </td>
+              <td>
+                {{ currentLanguage === 'vi'? data.status_vi : data.status }}
+              </td>
+              <td>
+                {{ data.assignee_full_name }}
+              </td>
+
+              <td nzAlign="center">
+                <span
+                  (click)="onClickDetailVisitor(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="eye"
+                  nzTheme="outline"
+                ></span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+  <!-- END CONTENT -->
+</aio-template-layout>

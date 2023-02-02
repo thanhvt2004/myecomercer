@@ -1,0 +1,472 @@
+<div class="form-visitor-container">
+  <div class="form-container">
+    <div class="header-container">
+      <div class="title">ENQUIRY FORM</div>
+      <div>(Phiếu thông tin khách hàng)</div>
+    </div>
+    <form *ngIf="visitorForm" nz-form [formGroup]="visitorForm">
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="full_name"
+          >
+            FULL NAME&nbsp; <span>(Họ và tên)</span></nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="full_name" id="full_name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="gender"
+          >
+            SEX&nbsp; <span>(Giới tính)</span></nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <nz-radio-group formControlName="sex">
+              <label nz-radio nzValue="male"> Male (Nam)</label>
+              <label nz-radio nzValue="female">Female (Nữ)</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="date_of_birth"
+          >
+            DATE OF BIRTH&nbsp; <span>(Ngày sinh)</span></nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <nz-date-picker
+              style="width: 60%"
+              formControlName="date_of_birth"
+              id="date_of_birth"
+              [nzFormat]="dateFormat"
+            ></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="current_school"
+          >
+            SCHOOL/UNIVERSITY&nbsp; <span>(Trường học)</span></nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="current_school" id="school" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="home_address"
+          >
+            HOME ADDRESS&nbsp; <span>(Địa chỉ nhà)</span></nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="home_address" id="home_address" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="email"
+          >
+            EMAIL</nz-form-label
+          >
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="mobile_phone"
+          >
+            MOBILE PHONE&nbsp; <span>(Số di động)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="mobile_phone" id="mobile_phone" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="parent_1_name"
+          >
+            PARENT'S 1 NAME&nbsp; <span>(Tên bố hoặc mẹ)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="parent_1_name" id="parent_1_name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="parent_1_mobile"
+          >
+            PARENT'S 1 MOBILE&nbsp; <span>(SĐT bố hoặc mẹ)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input
+              nz-input
+              formControlName="parent_1_mobile"
+              id="parent_1_mobile"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="parent_2_name"
+          >
+            PARENT'S 2 NAME&nbsp; <span>(Tên bố hoặc mẹ)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input nz-input formControlName="parent_2_name" id="parent_2_name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="parent_2_mobile"
+          >
+            PARENT'S 2 MOBILE&nbsp; <span>(SĐT bố hoặc mẹ)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input
+              nz-input
+              formControlName="parent_2_mobile"
+              id="parent_2_mobile"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="form-row-item">
+        <nz-form-item nz-row nzJustify="center">
+          <nz-form-label
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 9, offset: 1 }"
+            [nzXl]="{ span: 6, offset: 2 }"
+            nzFor="learning_purposes"
+          >
+            LEARNING PURPOSES<span>(Mục đích học)</span>
+          </nz-form-label>
+          <nz-form-control
+            nz-col
+            [nzSm]="{ span: 21, offset: 1 }"
+            [nzMd]="{ span: 21, offset: 1 }"
+            [nzLg]="{ span: 10, offset: 2 }"
+            [nzXl]="{ span: 10, offset: 3 }"
+          >
+            <input
+              nz-input
+              formControlName="learning_purposes"
+              id="learning_purposes"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item>
+          <nz-checkbox-wrapper style="width: 100%" (nzOnChange)="studentStudyPurposeChange($event)">
+            <div *ngFor="let data of studentStudyPurpose; let i = index">
+            <div *ngIf="i%2===0" nz-row nzJustify="center">
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 8, offset: 1 }"
+                [nzXl]="{ span: 8, offset: 3 }"
+              >
+                <label nz-checkbox nzValue="{{data.id}}"
+                  >{{data.value}} &nbsp;<span>({{data.value_vi}})</span></label>
+            </div>
+            <div
+            nz-col
+            [nzSm]="{ span: 24, offset: 4 }"
+            [nzMd]="{ span: 24, offset: 4 }"
+            [nzLg]="{ span: 8, offset: 1 }"
+            [nzXl]="{ span: 8, offset: 3 }"
+          >
+            <label *ngIf="studentStudyPurpose[i+1] != null" nz-checkbox nzValue="{{studentStudyPurpose[i+1]?.id}}"
+              >{{studentStudyPurpose[i+1]?.value}} &nbsp;<span
+                >({{studentStudyPurpose[i+1]?.value_vi}})</span
+              ></label>
+          </div>
+          </div>
+            
+        </div>
+              <!-- <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 10, offset: 1 }"
+                [nzXl]="{ span: 10, offset: 2 }"
+              >
+                <label nz-checkbox nzValue="B"
+                  >School Study&nbsp;<span>(Việc học tại trường)</span></label
+                >
+              </div> -->
+            <!-- </div> -->
+            <!-- <div nz-row nzJustify="center">
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 8, offset: 1 }"
+                [nzXl]="{ span: 8, offset: 3 }"
+              >
+                <label nz-checkbox nzValue="C"
+                  >Get used English&nbsp;<span
+                    >(Làm quen với tiếng Anh)</span
+                  ></label
+                >
+              </div>
+
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 10, offset: 1 }"
+                [nzXl]="{ span: 10, offset: 2 }"
+              >
+                <label nz-checkbox nzValue="D"
+                  >Overseas Study&nbsp;<span>(Du học)</span></label
+                >
+              </div>
+            </div>-->
+          </nz-checkbox-wrapper>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <div nz-row nzJustify="center">
+          <p class="description" nz-col [nzMd]="18" [nzLg]="20" [nzXl]="18">
+            Bạn có nhu cầu tư vấn Du học và xin Học bổng không? Nếu có vui lòng
+            lựa chương trình Du học bạn quan tâm bên dưới để nhân viên Tư vấn du
+            học Havina Global liên hệ tư vấn chi tiết.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-row-item">
+        <nz-form-item>
+          <nz-checkbox-wrapper style="width: 100%" (nzOnChange)="studentStudyInterestChange($event)">
+            <div *ngFor="let data of studentStudyInterest; let i = index">
+
+            <div *ngIf="i%2===0" nz-row nzJustify="center">
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 8, offset: 1 }"
+                [nzXl]="{ span: 8, offset: 3 }"
+              >
+                <label nz-checkbox nzValue="{{data.id}}"
+                  >{{data.value}}&nbsp;<span>({{data.value_vi}})</span></label
+                >
+              </div>
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 10, offset: 1 }"
+                [nzXl]="{ span: 10, offset: 2 }"
+              >
+                <label  *ngIf="studentStudyInterest[i+1] != null" nz-checkbox nzValue="studentStudyPurpose[i+1].id"
+                  >{{studentStudyInterest[i+1].value}}&nbsp;<span
+                    >({{studentStudyInterest[i+1].value_vi}})</span
+                  ></label
+                >
+              </div>
+            </div>
+            </div>
+            <!-- <div nz-row nzJustify="center">
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 8, offset: 1 }"
+                [nzXl]="{ span: 8, offset: 3 }"
+              >
+                <label nz-checkbox nzValue="C"
+                  >Undergraduate Studies&nbsp;<span
+                    >(Bậc ĐH-Cao đẳng)</span
+                  ></label
+                >
+              </div>
+
+              <div
+                nz-col
+                [nzSm]="{ span: 24, offset: 4 }"
+                [nzMd]="{ span: 24, offset: 4 }"
+                [nzLg]="{ span: 10, offset: 1 }"
+                [nzXl]="{ span: 10, offset: 2 }"
+              >
+                <label nz-checkbox nzValue="D"
+                  >Post Graduate&nbsp;<span>(Bậc thạc sỹ/Sau ĐH)</span></label
+                >
+              </div>
+            </div> -->
+          </nz-checkbox-wrapper>
+        </nz-form-item>
+      </div>
+
+      <div class="form-row-item">
+        <div nz-row nzJustify="center">
+          <p class="text-thanks" nz-col nzSpan="24">
+            Cảm ơn quý phụ huynh/học sinh đã tin tưởng lựa chọn Havina!
+          </p>
+        </div>
+      </div>
+
+      <div class="form-row-item">
+        <div class="button-container">
+          <button nzSize="large" nz-button nzType="primary" (click)="onCreateVisitor()">
+            <span nz-icon nzType="star"></span>Gửi thông tin
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

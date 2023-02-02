@@ -1,0 +1,149 @@
+@import "./color.scss";
+
+nz-divider {
+    font-weight: bold !important;
+}
+
+button {
+    text-transform: uppercase;
+}
+
+nz-form-control {
+ .ant-form-item-explain {
+     .ant-form-item-explain-error {
+           color: $error-color;
+           font-size: 12px;
+     }
+   }  
+  }    
+
+.ant-table-thead {
+    text-transform: uppercase;
+    .ant-table-cell {
+        font-weight: bold !important;
+    }
+}
+
+.ant-modal-body {
+    padding: 24px 56px;
+    font-size: 16px;
+    line-height: 1.5715;
+    word-wrap: break-word;
+}
+
+.ant-input[disabled] {
+    color: #000000;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 1;
+    padding: 0;
+}
+
+.ant-input[disabled]:hover{
+    border-color: transparent;
+}
+
+
+kendo-scheduler .k-event, .k-event {
+    background: $primary-color;
+}
+.k-button-solid-base.k-selected {
+    background: $primary-color;
+    border-color : $primary-color;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 5px;
+  }
+
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+
+.main-header {
+    .reponsive-menu {
+        display: none;
+    }
+}
+
+.drawer-menu {
+    .ant-drawer-wrapper-body {
+        background-color: #303b70;
+    }
+}
+.avatar {
+    img {
+        border-radius: 50%;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    /* styles for mobile browsers smaller than 480px; (iPhone) */
+    .main-header {
+        .first-menu {
+            display: none;
+        }
+        .menu-sidebar {
+            display: none;
+        }
+        .reponsive-menu {
+            display: inline;
+        }
+        .logo-menu {
+            background: #4a547d;
+            img {
+                max-height: 50px;
+                margin: 1rem;
+            }
+            button {
+                float: right;
+                margin: 1rem;
+            }
+        }
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.action-icon {
+    padding-left: 5px;
+}
+
+.action-column a {
+    text-decoration: none;
+    color: black;
+}
+
+.pl-5 {
+    padding-left: 5px;
+}
+.pl-10 {
+    padding-left: 10px;
+}
+.pr-5 {
+    padding-right: 5px;
+}
+.pr-10 {
+    padding-right: 10px;
+}

@@ -1,0 +1,435 @@
+<form nz-form [formGroup]="addSessionForm">
+  <!-- ROW 1 -->
+
+  <!-- ROW 2 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="day"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Date" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-date-picker
+            (ngModelChange)="onChangeDate($event)"
+            formControlName="start_date"
+            id="start_date"
+            style="width: 40%"
+            [nzFormat]="dateFormat"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="start_time"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Hour" | translate }}
+        </nz-form-label>
+        <div class="time-picker-container">
+          <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+            <nz-time-picker
+              formControlName="day_start_time"
+              id="day_start_time"
+              (ngModelChange)="onChangeStartTime($event)"
+              nzFormat="HH:mm"
+              [nzHourStep]="1"
+              [nzMinuteStep]="5"
+              nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+            >
+            </nz-time-picker>
+            <div
+              class="ant-form-item-explain error-message"
+              *ngIf="
+                addSessionForm.errors &&
+                addSessionForm.value.day_start_time &&
+                addSessionForm.value.day_end_time
+              "
+            >
+              {{ "Messages.TimeInvalid" | translate }}
+            </div>
+          </nz-form-control>
+          <div>{{ "Modules.Class.New.Forms.To" | translate }}</div>
+          <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+            <nz-time-picker
+              formControlName="day_end_time"
+              id="day_end_time"
+              nzFormat="HH:mm"
+              (ngModelChange)="onChangeEndTime($event)"
+              [nzHourStep]="1"
+              [nzMinuteStep]="5"
+              nzNowText="{{ 'Modules.Class.New.Forms.Now' | translate }}"
+            >
+            </nz-time-picker>
+          </nz-form-control>
+        </div>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="skill_ids"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Skill" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzMode="multiple"
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="skill_ids"
+            (ngModelChange)="onChangeSkills($event)"
+            id="skill_ids"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let o of skills"
+              [nzLabel]="o.name"
+              [nzValue]="o.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 5 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="room_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.New.Tables.Room" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="room_id"
+            id="room_id"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let room of rooms"
+              [nzLabel]="room.name"
+              [nzValue]="room.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <!-- ROW 6-->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label
+          nzFor="session_type_id"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="4"
+        >
+          {{ "Modules.Class.ClassDetail.Labels.SessionType" | translate }}
+        </nz-form-label>
+
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="20">
+          <nz-select
+            nzShowSearch
+            nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+            formControlName="session_type_id"
+            id="session_type_id"
+            [nzShowArrow]="true"
+          >
+            <nz-option
+              *ngFor="let sessionType of sessionTypes"
+              [nzLabel]="sessionType.name"
+              [nzValue]="sessionType.id"
+            >
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+<!-- ROW 7 -->
+<div
+  *ngIf="
+    (listOfTeacherData && listOfTeacherData.length > 0) ||
+    (listOfOthersTeacherData && listOfOthersTeacherData.length > 0)
+  "
+  nz-row
+  [nzGutter]="24"
+  style="margin-bottom: 20px"
+>
+  <div nz-col [nzSpan]="12">
+    <nz-segmented
+      class="ant-segmented-group"
+      [nzOptions]="[
+        'Modules.Class.New.Tables.Teacher' | translate,
+        'Modules.Class.New.Tables.Others' | translate
+      ]"
+      [(ngModel)]="selectedIndexTeacher"
+      (ngModelChange)="onChangeTabTeacher($event)"
+    ></nz-segmented>
+  </div>
+  <div nz-col [nzSpan]="12">
+    <ng-container *ngIf="selectedIndexTeacher === 0">
+      <nz-input-group
+        [nzPrefix]="prefixIconSearch"
+        [nzSuffix]="suffixIconSearch"
+      >
+        <input
+          type="text"
+          [(ngModel)]="teacherValue"
+          nz-input
+          (keyup.enter)="onFilterTeacher(selectedIndexTeacher)"
+          placeholder="{{ 'Labels.SearchTeacher' | translate }}"
+        />
+      </nz-input-group>
+      <ng-template #prefixIconSearch>
+        <span
+          class="pointer"
+          (click)="onFilterTeacher(selectedIndexTeacher)"
+          nz-icon
+          nzType="search"
+        ></span>
+      </ng-template>
+      <ng-template #suffixIconSearch>
+        <span
+          class="pointer"
+          *ngIf="teacherValue.length > 0"
+          style="color: rgb(180, 180, 180)"
+          (click)="resetFilterTeacher(selectedIndexTeacher)"
+          nz-icon
+          nzType="close"
+        ></span>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngIf="selectedIndexTeacher === 1">
+      <nz-input-group
+        [nzPrefix]="prefixIconSearch"
+        [nzSuffix]="suffixIconSearch"
+      >
+        <input
+          type="text"
+          [(ngModel)]="teacherOthersValue"
+          nz-input
+          (keyup.enter)="onFilterTeacher(selectedIndexTeacher)"
+          placeholder="{{ 'Labels.SearchTeacher' | translate }}"
+        />
+      </nz-input-group>
+      <ng-template #prefixIconSearch>
+        <span
+          class="pointer"
+          (click)="onFilterTeacher(selectedIndexTeacher)"
+          nz-icon
+          nzType="search"
+        ></span>
+      </ng-template>
+      <ng-template #suffixIconSearch>
+        <span
+          class="pointer"
+          *ngIf="teacherOthersValue.length > 0"
+          style="color: rgb(180, 180, 180)"
+          (click)="resetFilterTeacher(selectedIndexTeacher)"
+          nz-icon
+          nzType="close"
+        ></span>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+<!-- ROW 8 -->
+<ng-container *ngIf="selectedIndexTeacher === 0">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-table
+        class="w-auto-scroll"
+        [nzData]="listOfTeacherData"
+        [nzBordered]="true"
+        #nzTeacherTable
+        nzShowPagination
+        [nzPageSize]="pageSize"
+        [(nzPageIndex)]="pageIndex"
+        style="width: 100%"
+      >
+        <thead>
+          <tr>
+            <th width="20%">
+              {{ "Modules.Class.New.Tables.Teacher" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Class.New.Tables.TeachingHour" | translate }}
+            </th>
+            <th width="10%">
+              {{ "Modules.Class.New.Tables.Contract" | translate }}
+            </th>
+            <th width="10%" nzAlign="center">
+              {{ "Modules.Class.New.Tables.Action" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of nzTeacherTable.data">
+            <tr>
+              <td class="avatar">
+                {{ data.teacher_name }}
+              </td>
+              <td>
+                {{
+                  data?.assigned_teaching_hours
+                    ? (data?.assigned_teaching_hours | number)
+                    : 0
+                }}{{
+                  data?.kpi_teaching_hours
+                    ? "/" + (data?.kpi_teaching_hours | number)
+                    : null
+                }}
+              </td>
+              <td>{{ data.contract_type_value }}</td>
+              <td class="text-center action-column">
+                <span
+                  *ngIf="data.is_selected"
+                  (click)="selectTeacher(data, selectedIndexTeacher)"
+                  nz-icon
+                  nzType="check-circle"
+                  nzTheme="fill"
+                  class="teacher-selected pointer"
+                ></span>
+                <span
+                  *ngIf="!data.is_selected"
+                  (click)="selectTeacher(data, selectedIndexTeacher)"
+                  nz-icon
+                  nzType="close-circle"
+                  nzTheme="outline"
+                  class="teacher-unselected pointer"
+                ></span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="selectedIndexTeacher === 1">
+  <!-- ROW 8 -->
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <nz-table
+        #nzTable
+        class="w-auto-scroll"
+        [nzData]="listOfOthersTeacherData"
+        nzShowPagination
+        [nzPageSize]="pageSizeOthers"
+        [(nzPageIndex)]="pageIndexOthers"
+        [nzBordered]="true"
+        style="width: 100%; margin: 20px 0"
+      >
+        <thead>
+          <tr>
+            <th width="20%">
+              {{ "Modules.Class.New.Tables.Teacher" | translate }}
+            </th>
+            <th width="20%">
+              {{ "Modules.Class.New.Tables.TeachingHour" | translate }}
+            </th>
+            <th width="10%">
+              {{ "Modules.Class.New.Tables.Contract" | translate }}
+            </th>
+            <th width="10%" nzAlign="center">
+              {{ "Modules.Class.New.Tables.Action" | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of nzTable.data">
+            <tr>
+              <td class="avatar">
+                {{ data.teacher_name }}
+              </td>
+              <td>
+                {{
+                  data?.assigned_teaching_hours
+                    ? (data?.assigned_teaching_hours | number)
+                    : 0
+                }}{{
+                  data?.kpi_teaching_hours
+                    ? "/" + (data?.kpi_teaching_hours | number)
+                    : null
+                }}
+              </td>
+              <td>{{ data?.contract_type_value }}</td>
+              <td class="text-center action-column">
+                <span
+                  *ngIf="data.is_selected"
+                  (click)="selectTeacher(data, selectedIndexTeacher)"
+                  nz-icon
+                  nzType="check-circle"
+                  nzTheme="fill"
+                  class="teacher-selected pointer"
+                ></span>
+                <span
+                  *ngIf="!data.is_selected"
+                  (click)="selectTeacher(data, selectedIndexTeacher)"
+                  nz-icon
+                  nzType="close-circle"
+                  nzTheme="outline"
+                  class="teacher-unselected pointer"
+                ></span>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</ng-container>
+<div class="button-container">
+  <button nz-button nzType="primary" (click)="onCloseSessionForm()">
+    {{ "Labels.Save" | translate }}
+  </button>
+  <button nz-button (click)="onCancel()">
+    {{ "Labels.Cancel" | translate }}
+  </button>
+</div>

@@ -1,0 +1,676 @@
+<aio-template-layout>
+  <!-- BREAD CRUMB -->
+  <ng-container breadcrumbTemplate>
+    <nz-breadcrumb nzSeparator=">">
+      <nz-breadcrumb-item
+        ><a routerLink="/">
+          <i nz-icon nzType="home"> </i>
+          {{ "Modules.Menu.Home" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item
+        ><a routerLink="/student/visitor">
+          {{ "Modules.Menu.Student.VisitorList" | translate }}</a
+        ></nz-breadcrumb-item
+      >
+
+      <nz-breadcrumb-item>
+        {{
+          "Modules.Menu.Student.VisitorDetail" | translate
+        }}</nz-breadcrumb-item
+      >
+    </nz-breadcrumb>
+  </ng-container>
+  <!-- END BREAD CRUMB -->
+
+  <!-- CONTENT -->
+  <ng-container contentTemplate>
+    <div class="header-content-container">
+      <!-- TAB SEGMENT -->
+      <nz-segmented
+        [nzOptions]="options"
+        [(ngModel)]="selectedIndex"
+      ></nz-segmented>
+      <!--END TAB SEGMENT -->
+      <div>
+        <div *ngIf="isEdit && selectedIndex === 0" class="register-area">
+          <button nz-button nzType="primary" (click)="onSaveVisitorDetail()">
+            {{ "Labels.Save" | translate }}
+          </button>
+          <button nz-button (click)="onClickCancel()">
+            {{ "Labels.Cancel" | translate }}
+          </button>
+        </div>
+        <div *ngIf="!isEdit && selectedIndex === 0" class="register-area">
+          <button nz-button nzType="primary" (click)="onClickEditVisitor()">
+            {{ "Labels.Update" | translate }}
+          </button>
+        </div>
+        <div *ngIf="selectedIndex === 1">
+          <button nz-button nzType="primary" (click)="onAddVisitorHistory()">
+            {{ "Labels.Create" | translate }}
+          </button>
+        </div>
+        <div *ngIf="selectedIndex === 2">
+          <button nz-button nzType="primary" (click)="onAddEntranceTest()">
+            {{ "Labels.Create" | translate }}
+          </button>
+        </div>
+        <div *ngIf="selectedIndex ===3" class="register-area">
+          <button *ngIf="studyRouteStatus=='Draf'" nz-button nzType="primary" (click)="onAddStudyRoute(true)">
+            {{ "Labels.Save" | translate }}
+          </button>
+          <button *ngIf="studyRouteStatus=='Draf'" nz-button nzType="primary" (click)="onAddStudyRoute(false)">
+            {{ "Labels.Submit" | translate }}
+          </button>
+          <button *ngIf="studyRouteStatus=='Submitted'"  nz-button nzType="primary" (click)="onUpdateStudyRoute(true)">
+            {{ "Labels.Approve" | translate }}
+          </button>
+          <button *ngIf="studyRouteStatus=='Submitted'"  nz-button nzType="primary" (click)="onUpdateStudyRoute(false)">
+            {{ "Labels.Reject" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="selectedIndex === 0">
+      <div class="ant-advanced-search-form">
+        <form *ngIf="visitorDetailForm" nz-form [formGroup]="visitorDetailForm">
+          <!-- ROW 1 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="full_name">
+                  {{ "Modules.Student.FullName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="full_name" id="full_name" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="sex">
+                  {{ "Modules.Student.Gender" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <nz-radio-group formControlName="sex">
+                    <label nz-radio nzValue="male">{{
+                      "Modules.Student.Male" | translate
+                    }}</label>
+                    <label nz-radio nzValue="female">{{
+                      "Modules.Student.Female" | translate
+                    }}</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <!-- ROW 2 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="date_of_birth">
+                  {{ "Modules.Student.DateOfBirth" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <nz-date-picker
+                    style="width: 60%"
+                    formControlName="date_of_birth"
+                    id="date_of_birth"
+                    [nzFormat]="dateFormat"
+                  ></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="current_school">
+                  {{ "Modules.Student.School" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="current_school"
+                    id="current_school"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <!-- ROW 3 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="home_address">
+                  {{ "Modules.Student.Address" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="home_address"
+                    id="home_address"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="email">
+                  {{ "Modules.Student.Email" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input nz-input formControlName="email" id="email" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <!-- ROW 4 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="mobile_phone">
+                  {{ "Modules.Student.Phone" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="mobile_phone"
+                    id="mobile_phone"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="form-row-item"></div>
+          </div>
+
+          <!-- ROW 5 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="parent_1_name">
+                  {{ "Modules.Student.ParentName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="parent_1_name"
+                    id="parent_1_name"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="parent_1_mobile">
+                  {{ "Modules.Student.ParentPhone" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="parent_1_mobile"
+                    id="parent_1_mobile"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <!-- ROW 6 -->
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="parent_2_name">
+                  {{ "Modules.Student.ParentName" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="parent_2_name"
+                    id="parent_2_name"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="parent_2_mobile">
+                  {{ "Modules.Student.ParentPhone" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="parent_2_mobile"
+                    id="parent_2_mobile"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="learning_purposes">
+                  {{ "Modules.Student.Purposes" | translate }}</nz-form-label
+                >
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="learning_purposes"
+                    id="learning_purposes"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="form-row-item"></div>
+          </div>
+
+          <div class="form-row-container">
+            <nz-checkbox-wrapper
+              style="width: 100%"
+              (nzOnChange)="studentStudyPurposeChange($event)"
+            >
+              <div
+                class="form-row-checkbox"
+                *ngFor="let data of studentStudyPurpose; let i = index"
+              >
+                <div class="form-row-item" *ngIf="i % 2 === 0">
+                  <nz-form-item>
+                    <label
+                      nz-checkbox
+                      nzValue="{{ data.id }}"
+                      nzChecked="{{ data.selected }}"
+                      nzDisabled="{{ !isEdit }}"
+                      >{{ data.value }}&nbsp;<span
+                        >({{ data.value_vi }})</span
+                      ></label
+                    >
+                  </nz-form-item>
+                </div>
+                <div
+                  class="form-row-item"
+                  style="margin-left: 22%"
+                  *ngIf="i % 2 === 0"
+                >
+                  <nz-form-item>
+                    <label
+                      *ngIf="studentStudyPurpose[i + 1] != null"
+                      nz-checkbox
+                      nzValue="studentStudyPurpose[i+1].id"
+                      nzChecked="{{ studentStudyPurpose[i + 1].selected }}"
+                      nzDisabled="{{ !isEdit }}"
+                      >{{ studentStudyPurpose[i + 1].value }}&nbsp;<span
+                        >({{ studentStudyPurpose[i + 1].value_vi }})</span
+                      ></label
+                    >
+                  </nz-form-item>
+                </div>
+              </div>
+            </nz-checkbox-wrapper>
+          </div>
+
+          <div class="form-row-container">
+            <div class="form-row-item">
+              <nz-form-item>
+                <nz-form-label nzFor="purposes">
+                  {{ "Modules.Student.Demand" | translate }}</nz-form-label
+                >
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="form-row-container">
+            <nz-form-item style="width: 100%">
+              <nz-checkbox-wrapper
+                style="width: 100%"
+                (nzOnChange)="studentStudyInterestChange($event)"
+              >
+                <div
+                  class="form-row-checkbox"
+                  *ngFor="let data of studentStudyInterest; let i = index"
+                >
+                  <div class="checkbox-container" *ngIf="i % 2 === 0">
+                    <label
+                      nz-checkbox
+                      nzValue="{{ data.id }}"
+                      nzDisabled="{{ !isEdit }}"
+                      nzChecked="{{ data.selected }}"
+                      >{{ data.value }}&nbsp;<span
+                        >({{ data.value_vi }})</span
+                      ></label
+                    >
+                  </div>
+                  <div *ngIf="i % 2 === 0" style="margin-left: 11%">
+                    <label
+                      *ngIf="studentStudyInterest[i + 1] != null"
+                      nz-checkbox
+                      nzValue="studentStudyPurpose[i+1].id"
+                      nzDisabled="{{ !isEdit }}"
+                      nzChecked="{{ studentStudyInterest[i + 1].selected }}"
+                      >{{ studentStudyInterest[i + 1].value }}&nbsp;<span
+                        >({{ studentStudyInterest[i + 1].value_vi }})</span
+                      ></label
+                    >
+                  </div>
+                </div>
+              </nz-checkbox-wrapper>
+            </nz-form-item>
+          </div>
+          <div>
+            <div nz-row [nzGutter]="24"></div>
+          </div>
+        </form>
+      </div>
+    </ng-container>
+    <!-- lich su tab -->
+    <ng-container *ngIf="selectedIndex === 1">
+      <nz-table #editRowTable nzBordered [nzData]="histories">
+        <thead>
+          <tr>
+            <th>{{ "Modules.Student.Date" | translate }}</th>
+            <th>{{ "Modules.Student.History.TargetCourse" | translate }}</th>
+            <th>{{ "Modules.Student.History.TargetClass" | translate }}</th>
+            <th>{{ "Modules.Student.History.Note" | translate }}</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of histories" class="editable-row">
+            <td>
+              <div>
+                {{ data.visit_date | stringReplace }}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{
+                  currentLanguage === "vi"
+                    ? data.target_class_setup_type_value_vi
+                    : data.target_class_setup_type_value
+                }}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{ data.target_course_name }}
+              </div>
+            </td>
+            <td>
+              <div>
+                {{ data.note }}
+              </div>
+            </td>
+            <td>
+              <span
+                (click)="onEditVisitorHistory(data)"
+                class="pointer"
+                nz-icon
+                nzType="edit"
+                nzTheme="outline"
+              ></span>
+
+              <!-- <span
+              (click)="onDeleteVisitorHistory(data)"
+              class="action-icon"
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+            ></span> -->
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-container>
+
+    <ng-container *ngIf="selectedIndex === 2">
+      <nz-table #nestedTable [nzData]="entranceTestes" [nzPageSize]="10">
+        <thead>
+          <tr>
+            <th></th>
+            <th>{{ "Modules.Student.Test.Date" | translate }}</th>
+            <th>{{ "Modules.Student.Test.TotalScore" | translate }}</th>
+            <th>{{ "Modules.Student.Test.Course" | translate }}</th>
+            <th>{{ "Modules.Student.Test.SaleCare" | translate }}</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+            <tr>
+              <td [(nzExpand)]="data.expand"></td>
+              <td>{{ data.date | date : "dd/MM/YYYY" }}</td>
+              <td>{{ data.total_score }}</td>
+              <td>{{ data.course_name }}</td>
+              <td>{{ data.sale_care_full_name }}</td>
+              <td>
+                <span
+                  (click)="onEditVisitorEntranceTest(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="edit"
+                  nzTheme="outline"
+                ></span>
+
+                <!-- <span
+                  (click)="onDeleteVisitorHistory(data)"
+                  class="action-icon"
+                  nz-icon
+                  nzType="delete"
+                  nzTheme="outline"
+                ></span> -->
+              </td>
+            </tr>
+            <tr [nzExpand]="data.expand">
+              <nz-table
+                #innerTable
+                [nzData]="data.exams"
+                nzSize="middle"
+                [nzShowPagination]="false"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      {{ "Modules.Student.Test.Date" | translate }}
+                    </th>
+                    <th>
+                      {{ "Modules.Student.Test.Skill" | translate }}
+                    </th>
+                    <th>
+                      {{ "Modules.Student.Test.Score" | translate }}
+                    </th>
+                    <th>
+                      {{ "Modules.Student.Test.Teacher" | translate }}
+                    </th>
+                    <th>
+                      {{ "Modules.Student.Test.Note" | translate }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of innerTable.data">
+                    <td>{{ data.date | date : "dd/MM/YYYY" }}</td>
+                    <td>{{ data.skill_name }}</td>
+                    <td>{{ data.score }}</td>
+                    <td>{{ data.teacher_full_name }}</td>
+                    <td>{{ data.note }}</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </tr>
+          </ng-template>
+        </tbody>
+      </nz-table>
+    </ng-container>
+
+    <ng-container *ngIf="selectedIndex === 3">
+      <div class="form-container">
+          <nz-form-item class="form-item-container">
+            <nz-form-label
+              nzFor="target_class_setup_type_id_router"
+              nzXs="24"
+              nzSm="24"
+              nzMd="6"
+              nzLg="6"
+              nzXl="3"
+              class="text-left"
+            >
+            {{ "Modules.Student.History.TargetClass" | translate }}
+            </nz-form-label>
+    
+
+            <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="21">
+              <!-- <nz-select
+                nzShowSearch
+                nzPlaceHolder="{{ 'Labels.Select' | translate }}"
+                formControlName="target_class_setup_type_id_router"
+                (ngModelChange)="onChangeTargetClassRoute($event)"
+                id="target_class_setup_type_id_router"
+                [nzShowArrow]="true"
+              >
+                <nz-option
+                  *ngFor="let o of targetClasses"
+                  [nzLabel]="o.value"
+                  [nzValue]="o.id"
+                >
+                </nz-option>
+              </nz-select> -->
+              <nz-radio-group [(ngModel)]="targetClassChecked">
+                <label nz-radio *ngFor="let item of targetClasses" nzValue="{{item.id}}">{{item.value}}</label>
+              </nz-radio-group>
+              </nz-form-control>
+              </nz-form-item>
+      </div>
+
+      
+      <div class="form-container">
+        <nz-form-item class="form-item-container">
+          <nz-form-label
+          nzFor="target_class_setup_type_id_router"
+          nzXs="24"
+          nzSm="24"
+          nzMd="6"
+          nzLg="6"
+          nzXl="3"
+          class="text-left"
+        >
+        {{ "Modules.Student.StudyRoute.Module" | translate }}
+        </nz-form-label>
+        <nz-form-control nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="21">
+          <nz-tree-select
+          #nzTreeSelectComponent
+          nzPlaceHolder="Please select"
+          [(ngModel)]="selectedCourse"
+          [nzMaxTagCount]="3"
+          [nzNodes]="nodes"
+          [nzDefaultExpandAll]="true"
+          [nzAllowClear]="false"
+          nzCheckable
+          (ngModelChange)="onTreeChange($event)"
+        ></nz-tree-select>
+      </nz-form-control>
+    </nz-form-item>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button [disabled] ="selectedCourse.length===0 || targetClassChecked.length ===0" nz-button [nzType]="'primary'" (click)="onGenerateData()">
+            <span nz-icon nzType="search" nzTheme="outline"></span>
+            {{ "Modules.Student.StudyRoute.GenerateData" | translate }}
+          </button>
+        </div>
+      </div>
+      <nz-table class="student-round-table" #studentRouteTable [nzData]="steps" [nzPageSize]="10">
+        <thead>
+          <tr>
+            <th>{{ "Modules.Student.StudyRoute.Course" | translate }}</th>
+            <th>{{ "Modules.Student.StudyRoute.Hours" | translate }}</th>
+            <th>{{ "Modules.Student.StudyRoute.TimeLine" | translate }}</th>
+            <th>{{ "Modules.Student.StudyRoute.Fee" | translate }}</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-data [ngForOf]="studentRouteTable.data">
+            <tr>
+              <td>{{ data.name }}</td>
+              <td>{{ data.sum_revenue_hours + ' giờ chính + '+data.sum_tutoring_hours+ ' giờ bổ trợ' }}</td>
+              <td>{{ data.min_estimated_duration_months +' - ' +data.max_estimated_duration_months +' tháng' }}</td>
+              <td>{{ data.order }}</td>
+              <td>
+                <!-- <span
+                  (click)="onEditVisitorEntranceTest(data)"
+                  class="pointer"
+                  nz-icon
+                  nzType="edit"
+                  nzTheme="outline"
+                ></span> -->
+              </td>
+            </tr>
+          
+          </ng-template>
+        </tbody>
+      </nz-table>
+    </ng-container>
+
+  </ng-container>
+  <!--END CONTENT -->
+</aio-template-layout>
+
+<!-- MODAL FOR ADD VISITOR HISTORY -->
+<nz-modal
+  [(nzVisible)]="visibleVisitorHistoryForm"
+  [nzTitle]="modalVisitorHistoryTitle"
+  [nzContent]="modalVisitorHistoryContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleVisitorHistoryForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="800"
+>
+  <ng-template #modalVisitorHistoryTitle class="text-center">
+    <span nz-icon nzType="setting" nzTheme="outline"></span>
+    {{ "Modules.Student.History.Title" | translate }}
+  </ng-template>
+  <ng-template #modalVisitorHistoryContent>
+    <aio-modal-visitor-history
+      [visitorHistory]="visitorHistory"
+      [targetCourses]="targetCourses"
+      [targetClasses]="targetClasses"
+      (onCloseForm)="onCloseVisitorHistoryForm($event)"
+      (onCancelForm)="onCancelVisitorHistoryForm()"
+    ></aio-modal-visitor-history>
+  </ng-template>
+</nz-modal>
+<!-- END MODAL FOR ADD VISITOR HISTORY -->
+
+<!-- MODAL FOR ADD VISITOR HISTORY -->
+<nz-modal
+  [(nzVisible)]="visibleEntranceTestForm"
+  [nzTitle]="modalEntranceTestTitle"
+  [nzContent]="modalEntranceTestContent"
+  [nzFooter]="null"
+  (nzOnCancel)="visibleEntranceTestForm = false"
+  [nzMaskClosable]="false"
+  [nzWidth]="1000"
+>
+  <ng-template #modalEntranceTestTitle class="text-center">
+    <span nz-icon nzType="setting" nzTheme="outline"></span>
+    {{ "Modules.Student.Test.Title" | translate }}
+  </ng-template>
+  <ng-template #modalEntranceTestContent>
+    <aio-modal-visitor-entrance-test
+      [visitorEntranceTest]="visitorEntranceTest"
+      [targetCourses]="targetCourses"
+      (onCloseForm)="onCloseEntranceTestForm($event)"
+      (onCancelForm)="onCancelEntranceTestForm()"
+    ></aio-modal-visitor-entrance-test>
+  </ng-template>
+</nz-modal>
+<!-- END MODAL FOR ADD VISITOR HISTORY -->
